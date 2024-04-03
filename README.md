@@ -1,10 +1,5 @@
 # Temperature Regulator System
 
-**File:** code.ino  
-**Author:** Vladimir Galović (EE 210/2018)  
-
----
-
 ## Description:
 
 This Arduino code implements a Temperature Regulator System using various components including a keypad, LCD display (controlled via I2C), DHT22 sensor for temperature and humidity, a DC fan, and a buzzer. The system allows users to monitor temperature and humidity levels, control the fan speed based on temperature, and activate the buzzer based on humidity thresholds. Users can also set parameter values through the keypad interface and monitor the system's status on the LCD.
