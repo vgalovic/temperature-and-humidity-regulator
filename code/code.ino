@@ -193,7 +193,7 @@ void keypadEvent(char key) {
       case '3': action_state = (action_state == 0 || action_state == 3) ? 2 : 1; break;
       case '4': action_state = (action_state == 0 || action_state == 2) ? 3 : 1; break;
       case '5': debug_enable = !debug_enable; action_state = 1; break;
-      case '6': set_parameters();
+      case '6': set_parameters(); action_state = 1; break;
       case '8': lcd.clear(); return;
       default: return;
     }
@@ -205,6 +205,9 @@ void keypadEvent(char key) {
  * @brief Sets parameter values using keypad input and displays them on the LCD.
  */
 void set_parameters() {
+  analogWrite(PWM, 0);
+  digitalWrite(BUZZ, HIGH);
+  
   while(true) {
     char key_parameters = keypad.getKey();
 
