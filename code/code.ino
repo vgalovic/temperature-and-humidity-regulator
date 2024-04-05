@@ -158,23 +158,16 @@ void display() {
 
   lcd.setCursor(0, 0);
   if(display_state){
-    lcd.print("Temp: "); 
-    lcd.print(temperature);  
-    lcd.print(" "); 
-    lcd.print((char)223); 
-    lcd.print("C");
+    lcd.print("Temp: "); lcd.print(temperature); lcd.print(" "); lcd.print((char)223); lcd.print("C");
+    
     lcd.setCursor(0, 1);
-    lcd.print("Humi: "); 
-    lcd.print(humidity); 
-    lcd.print(" %");
+    lcd.print("Humi: "); lcd.print(humidity); lcd.print(" %");
   }
   else{
-    lcd.print("Fan speed: "); 
-    lcd.print(fanSpeed); 
-    lcd.print(" %");
+    lcd.print("Fan speed: "); lcd.print(fanSpeed); lcd.print(" %");
+    
     lcd.setCursor(0, 1);
-    lcd.print("Buzz: ");
-    lcd.print(buzz ? "On" : "Off");
+    lcd.print("Buzz: "); lcd.print(buzz ? "On" : "Off");
   } 
 }
 
@@ -183,12 +176,12 @@ void display() {
  */
 void debugMode() {
   lcd.clear();
+  
   lcd.setCursor(0, 0);
   lcd.print("DHT22 Debug mode");
-  lcd.setCursor(0, 1);
-  lcd.print("Serial: ");
-  lcd.print(DEBUG_SERIAL_BAUDRATE);
-  lcd.print(" b/s");
+  
+  lcd.setCursor(0, 1); 
+  lcd.print("Serial: "); lcd.print(DEBUG_SERIAL_BAUDRATE); lcd.print(" b/s");
 
   Serial.println(dht.debug());
 }
@@ -214,8 +207,10 @@ void action() {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Testiranje");
+      
       lcd.setCursor(0, 1);
       lcd.print(action_state == FAN_TEST ? "dc ventilatora" : "Zujalice");
+      
       digitalWrite(BUZZ, action_state == BUZZER_TEST ? LOW : HIGH);
       analogWrite(PWM, action_state == FAN_TEST ? 255 : 0);
       break;
@@ -258,10 +253,13 @@ void set_parameters() {
 
     if (keypad.getState() == PRESSED) {
       lcd.clear();
+      
       lcd.setCursor(2, 0);
       lcd.print(humidity_min);
+      
       lcd.setCursor(7, 0);
       lcd.print(humidity_max);
+      
       lcd.setCursor(12, 0);
       lcd.print(temperature_min);
       
