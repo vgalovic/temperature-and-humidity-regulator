@@ -46,8 +46,8 @@ This project implements a temperature regulator system using an Arduino microcon
 
 ### Keypad Pins
 
-- Row Pins: R1 (Pin 9), R2 (Pin 8)
-- Column Pins: C1 (Pin 5), C2 (Pin 4), C3 (Pin 3), C4 (Pin 2)
+- Row Pins: `R1` (Pin 9), `R2` (Pin 8)
+- Column Pins: `C1` (Pin 5), `C2` (Pin 4), `C3` (Pin 3), `C4` (Pin 2)
 
 ### LCD Pins
 
@@ -75,39 +75,39 @@ This project implements a temperature regulator system using an Arduino microcon
 
 ### Keypad Pins
 
-- R1, R2: Pin numbers for keypad row connections.
-- C1, C2, C3, C4: Pin numbers for keypad column connections.
+- `R1`, `R2`: Pin numbers for keypad row connections.
+- `C1`, `C2`, `C3`, `C4`: Pin numbers for keypad column connections.
 
 ### Keypad Dimensions
 
-- ROWS, COLS: Number of rows and columns on the keypad matrix.
+- `ROWS`, `COLS`: Number of rows and columns on the keypad matrix.
 
 ### LCD Configuration
 
-- i2cPort: I2C address of the LCD display.
-- totalColumns, totalRows: Number of columns and rows on the LCD display.
+- `i2cPort`: I2C address of the LCD display.
+- `totalColumns`, `totalRows`: Number of columns and rows on the LCD display.
 
 ### Pin Numbers
 
-- PWM, BUZZ, DHT: Pin numbers for PWM, buzzer, and DHT22 sensor.
+- `PWM`, `BUZZ`, `DHT`: Pin numbers for PWM, buzzer, and DHT22 sensor.
 
 ### Debug and Timing
 
-- DEBUG_SERIAL_BAUDRATE: Baud rate for serial communication in debug mode.
-- DEBOUNCE_TIME: Debounce time for the keypad.
-- BUZZER_DELAY: Delay time for the buzzer.
-- DHT_UPDATE_INTERVAL: Interval for updating temperature and humidity readings from the DHT22 sensor.
-- FAN_SPEED_UPDATE_INTERVAL: Interval for updating the fan speed based on temperature.
+- `DEBUG_SERIAL_BAUDRATE`: Baud rate for serial communication in debug mode.
+- `DEBOUNCE_TIME`: Debounce time for the keypad.
+- `BUZZER_DELAY`: Delay time for the buzzer.
+- `DHT_UPDATE_INTERVAL`: Interval for updating temperature and humidity readings from the DHT22 sensor.
+- `FAN_SPEED_UPDATE_INTERVAL`: Interval for updating the fan speed based on temperature.
 
 ### Default Parameters
 
-- DEFAULT_HUMIDITY_MIN, DEFAULT_HUMIDITY_MAX, DEFAULT_TEMPERATURE_MIN: Default minimum and maximum humidity limits and default minimum temperature limit.
+- `DEFAULT_HUMIDITY_MIN`, `DEFAULT_HUMIDITY_MAX`,`DEFAULT_TEMPERATURE_MIN`: Default minimum and maximum humidity limits and default minimum temperature limit.
 
 ### Humidity and Temperature Adjustment
 
-- HUMIDITY_MIN_LOWER_LIMIT, HUMIDITY_MIN_UPPER_LIMIT: Lower and upper limits for adjusting the minimum humidity threshold.
-- HUMIDITY_MAX_LOWER_LIMIT, HUMIDITY_MAX_UPPER_LIMIT: Lower and upper limits for adjusting the maximum humidity threshold.
-- TEMPERATURE_MIN_LOWER_LIMIT, TEMPERATURE_MIN_UPPER_LIMIT: Lower and upper limits for adjusting the minimum temperature threshold.
+- `HUMIDITY_MIN_LOWER_LIMIT`, `HUMIDITY_MIN_UPPER_LIMIT`: Lower and upper limits for adjusting the minimum humidity threshold.
+- `HUMIDITY_MAX_LOWER_LIMIT`, `HUMIDITY_MAX_UPPER_LIMIT`: Lower and upper limits for adjusting the maximum humidity threshold.
+- `TEMPERATURE_MIN_LOWER_LIMIT`, `TEMPERATURE_MIN_UPPER_LIMIT`: Lower and upper limits for adjusting the minimum temperature threshold.
 
 ### Adjustment Steps
 
