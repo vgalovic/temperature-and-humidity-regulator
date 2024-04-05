@@ -111,7 +111,7 @@ This project implements a temperature regulator system using an Arduino microcon
 
 ### Adjustment Steps
 
-- HUMIDITY_STEP, TEMPERATURE_STEP: Step sizes for adjusting the humidity and temperature thresholds.
+- `HUMIDITY_STEP`, `TEMPERATURE_STEP`: Step sizes for adjusting the humidity and temperature thresholds.
 
 ---
 
