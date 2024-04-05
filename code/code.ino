@@ -238,7 +238,7 @@ void keypadEvent(char key) {
       case '3': action_state = (action_state == NORMAL_DISPLAY || action_state == BUZZER_TEST) ? FAN_TEST : NORMAL_DISPLAY; break;
       case '4': action_state = (action_state == NORMAL_DISPLAY || action_state == FAN_TEST) ? BUZZER_TEST : NORMAL_DISPLAY; break;
       case '5': debug_enable = !debug_enable; action_state = DEBUG_MODE; break;
-      case '6': set_parameters(); action_state = NORMAL_DISPLAY; break;
+      case '6': action_state = DEBUG_MODE; debug_enable = false; set_parameters(); break;
       case '8': lcd.clear(); return;
       default: return;
     }
