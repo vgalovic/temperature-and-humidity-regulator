@@ -141,7 +141,8 @@ uint8_t dcFanControl(uint8_t temperature) {
  * @brief Displays temperature, humidity, fan speed, and buzzer state on the LCD
  */
 void display() {
-  float humidity = dht.getHumidity(), temperature = dht.getTemperature();
+ uint64_t rawdata = dht.getRawData();
+  
   if(dht.getLastError() != 0){
     analogWrite(PWM, 0);
     digitalWrite(BUZZ, HIGH);
@@ -153,6 +154,12 @@ void display() {
     lcd.print("Sensor Error");
     return;
   }
+
+  uint16_t data = rawdata>>24;
+  float humidity = data/10.0;
+
+  data = rawdata>>8;
+  float temperature = (bitRead(data,15)) ? (data & 0x7FFF)/-10.0 : data/10.0;
 
   bool buzz = buzzControl((uint8_t)humidity);
   uint8_t fanSpeed = dcFanControl((uint8_t)temperature);
