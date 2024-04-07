@@ -112,40 +112,69 @@ Vladimir Galović (EE 210/2018) i Stefan Ostojić (EE 216/2016)\\
 
 \vspace{10pt}
 
-Regulator temperature i vlažnosti vazduha
+Regulacija temperature i vlažnosti vazduha
 
 \vspace{10pt}
 
-Ova tema je izabrana zbog interesovanja za rad DHT22 senzora dok su sve ostale funkcionalnosti (poput LCD displeja, tastature, zujalice...) dodate tokom realizacije projekta. 
+Ova tema je izabrana zbog interesovanja za rad sa DHT22 senzorom dok su sve ostale funkcionalnosti dodate tokom realizacije projekta. Sa ovim snezorom kao prvom tačkom projekta izabran je problem čitanja i regulisanja temperature i vlažnosti vazduha neke zatvorene sredine poput nekog skadišta gde je održavanje temperature i vlažnosti bitno. Primer za ovakav uređaj je humidor za cigare koji održva konstantnu temperaturu (16-22 °C) i vlažnost (60-75 \%) kako bi održao kvalitet cigare (Slika 1).
 
 \vspace{10pt}
 
-Poglavlje može u kratkim crtama da objasni šta predstavlja predmet projekta, čemu služi i koje su mu glavne karakteristike. Treba navesti i sve relevantne veze sa drugim oblastima od kojih će neke možda biti dotaknute u daljem tekstu.
+  Zarad brze i lake realizacije kao osnovna kontrolna jedinica izabrana je Arduiono pltforma koja pruža puno fleksibilnosti. Za aktuator je izabran BLDC motor sa ventilatorom koji bi najbrže uticao na regulisanje temperature i vlažnosti. LCD displej i tastatura su dodate radi lakše interakcije sa korisnikom, a uloga zujalice je da upozori korisnika na prevelike ili premale vrednosti vlažnosti vazduha. 
 
 \vspace{10pt}
 
-Takođe je obavezno u kratkim crtama opisati ono što je napisano u pojedinim poglavljima. Npr. 
-U trećem poglavlju dati su svi proračuni vezani za projekat kao i rezultati simulacija.
+Realizacija i upoznavanje sa svim karakteristikama komopnenti je započeta povezivanjem osnovih elemenata na protoboard i Arduino UNO. Pojedinačnim upoznavanjem sa svakom komponentom je smišljen krajni koncept projekta. Kao i ideje za adekvatano testiranje senzora i aktuatora. 
 
 \vspace{10pt}
 
-Mogu se kratko dati primeri i slike drugih uređaja iste ili slične namene. Mogu se istaći eventualne razlike koje postoje u odnosu na uređaj koji se želi razviti kao predmet ovog projekta.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.13]{images/primer}
+\caption{humidor za cigare}
+\end{figure}
 
 \pagebreak
 
-\section{Analiza proglema}
+\section{Analiza problema}
+
+Regulacija temperature i vlažnosti vazduha neke zatvorene sredine zahteva održanje ove dve vrednosti na prethodno zadatoj konstanti. Humidor održava obe vrednosti veoma precizno čime se kvalitet i ukus cigra ne menja. Da bi to postigao humidor mora imati elemete koji utiču na povećanje i na elemente koji utiču na smanjenje temperature i vlažnosti vazduha. 
 
 \vspace{10pt}
 
-Veoma važan deo projektnog rada. Naslov se po potrebi može promeniti, ali suština teksta mora da ostane analiza problema.
+Za povećanje temperature se koriste grejači, a za povećnje vlažnosti vazduha neki izvor vode ili prskalice. Dok za smanjenje i temperature i vlažnosti vazduha se koriste razne vrste ventilatora koji cirkulacijom vazduha smanjuju ove dve vrednosti. Na smanjenje vlažnsti čak utiče i vrsta drveta od koje je humidor napravlje. Kompleksnost nastaje pri delikatnom balansu ove dve celine, povećavanje i smanjivanje temperature i vlažnosti vazduha. Oba segmenta moraju biti proporcionalno aktivni kako bi održali unutrašnjost konstantnom, bez obzira na promene spoljašnje sredine u kojoj se Humidor nalazio.
 
 \vspace{10pt}
 
-Treba jasno istaći šta su glavni (i sporedni) ciljevi koji žele da se postignu razvojem novog uređaja. Treba navesti postojeća rešenja ukoliko postoje i mogu da se pronađu informacije o njima. Ova analiza i u praksi treba da se sprovede (ne samo u cilju navođenja u ovom tekstu) da bi se jasno zacrtao put razvoja uređaja i da bi se donele ključne odluke na osnovu kojih se neka potencijalna rešenja odbacuju, a druga prihvataju.
+Zarad pojednostavljivanja i lakše realizacije fokus se stavlja samo na proces smanjivanja temperature i vlažnosti vazduha. Za ovaj proces je samo potreban jedan aktuator. Koji je u primeru ovog projekta BLDC motor sa ventilatorom. Dok bi u procesu povećanja temperature i vlažnosti vazduha morali da imam bar dva aktuatora. Grejač i neki sistem vodenih pumpi koji bi distribuitao vodu u odgarajućoj meri. Čime bi se obim i kompleksnost ovog projekta znatno povećao. Ovim pojednostaviljanjem dolazi i do promena merenih vrenosti jer bez dodatnih komponenti naša sredina neće održavati temperaturu i vlažnost kao Hunidor nego kao srednju vrednost prostorije.
 
 \vspace{10pt}
 
-Ovakva analiza je jedan od ključnih elemenata inženjerskog razmišljanja i samim tim i jedan od ključnih ciljeva ovog projekta. Zbog toga je veoma važno da se u ovom odeljku navedu sva rešenja koja su razmatrana i da se obrazloži zašto je neko od njih usvojeno kao dobro, a neko drugo odbačeno kao neodgovarajuće za ovaj projekat.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+& Vlažnost & Temperatura\\
+\hline
+Humidor & 60 - 75 \% & 16 - 22 °C\\
+\hline
+Srednja vrednost prostorije & 30 - 80 \% & 26 - 30 °C\\
+\hline
+\end{tabular}
+\caption{Promea merenih vrednosti}
+\end{table}
+
+Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i vlažnosti vazduha, iako u suženom obliku. Dok sve ostale komponente doprinose boljoj interakciji korisnika sa uređajom. Regulacija je glavni cilj, dok je interfejs sporedni.
+
+%Veoma važan deo projektnog rada. Naslov se po potrebi može promeniti, ali suština teksta mora da ostane analiza problema.
+%
+%Treba jasno istaći šta su glavni (i sporedni) ciljevi koji žele da se postignu razvojem novog uređaja. Treba navesti postojeća rešenja ukoliko postoje i mogu da se pronađu informacije o njima. Ova analiza i u praksi treba da se sprovede (ne samo u cilju navođenja u ovom tekstu) da bi se jasno zacrtao put razvoja uređaja i da bi se donele ključne odluke na osnovu kojih se neka potencijalna rešenja odbacuju, a druga prihvataju.
+%
+%Ovakva analiza je jedan od ključnih elemenata inženjerskog razmišljanja i samim tim i jedan od ključnih ciljeva ovog projekta. Zbog toga je veoma važno da se u ovom odeljku navedu sva rešenja koja su razmatrana i da se obrazloži zašto je neko od njih usvojeno kao dobro, a neko drugo odbačeno kao neodgovarajuće za ovaj projekat.
+\vspace{10pt}
+
+
 \pagebreak
 
 \section{Proračuni i simulacioni rezultati}
