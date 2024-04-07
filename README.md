@@ -21,7 +21,7 @@ This project implements a temperature regulator system using an Arduino microcon
 - Keypad
 - LCD display (with I2C interface)
 - DHT22 temperature and humidity sensor
-- DC fan (with PWM control using a 2N2222 transistor)
+- 5V BLDC fan (with PWM control using a 2N2222 transistor)
 - Piezo buzzer (MH-FMD)
 
 ---
