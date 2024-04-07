@@ -33,6 +33,8 @@
 
 #define BUZZER_DELAY 200 /**< Delay for buzzer control */
 
+#define DELAY_IN_SETUP 1000 /**< Delay on the end of setup() */
+
 #define DHT_UPDATE_INTERVAL 2000 /**< Interval for updating DHT22 sensor data */
 
 #define FAN_SPEED_UPDATE_INTERVAL 100 /**< Interval for updating fan speed */
@@ -155,10 +157,10 @@ void display() {
     return;
   }
 
-  uint16_t data = rawdata>>24;
+  uint16_t data = rawdata >> 24;
   float humidity = data/10.0;
 
-  data = rawdata>>8;
+  data = rawdata >> 8;
   float temperature = (bitRead(data,15)) ? (data & 0x7FFF)/-10.0 : data/10.0;
 
   bool buzz = buzzControl((uint8_t)humidity);
@@ -317,7 +319,7 @@ void setup() {
 
   analogWrite(PWM, 0);
 
-  delay(1000);
+  delay(DELAY_IN_SETUP);
 }
 
 /**
