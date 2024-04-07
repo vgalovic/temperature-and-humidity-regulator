@@ -1,4 +1,4 @@
-# Temperature Regulator System
+# Temperature and humidity regulator 
 
 This project implements a temperature regulator system using an Arduino microcontroller, a keypad, a LCD display, a DHT22 sensor for temperature and humidity measurement, and a DC fan with PWM control. The system allows users to monitor temperature, humidity, fan speed, and buzzer state on the LCD display. It also includes features such as debug mode, fan speed testing, and buzzer testing.
 
