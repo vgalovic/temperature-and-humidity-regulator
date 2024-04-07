@@ -42,10 +42,10 @@
 #define DEFAULT_TEMPERATURE_MIN 26 /**< Default minimum temperature */
 
 #define HUMIDITY_MIN_LOWER_LIMIT 10 /**< Lower limit for humidity minimum */
-#define HUMIDITY_MIN_UPPER_LIMIT 40 /**< Upper limit for humidity minimum */
+#define HUMIDITY_MIN_UPPER_LIMIT 50 /**< Upper limit for humidity minimum */
 
-#define HUMIDITY_MAX_LOWER_LIMIT 50 /**< Lower limit for humidity maximum */
-#define HUMIDITY_MAX_UPPER_LIMIT 100 /**< Upper limit for humidity maximum */
+#define HUMIDITY_MAX_LOWER_LIMIT 60 /**< Lower limit for humidity maximum */
+#define HUMIDITY_MAX_UPPER_LIMIT 90 /**< Upper limit for humidity maximum */
 
 #define TEMPERATURE_MIN_LOWER_LIMIT 16 /**< Lower limit for temperature minimum */
 #define TEMPERATURE_MIN_UPPER_LIMIT 36 /**< Upper limit for temperature minimum */
@@ -142,7 +142,10 @@ uint8_t dcFanControl(uint8_t temperature) {
  */
 void display() {
   float humidity = dht.getHumidity(), temperature = dht.getTemperature();
-  if((humidity == -1) || (temperature == -1)){
+  if(dht.getLastError() != 0){
+    analogWrite(PWM, 0);
+    digitalWrite(BUZZ, HIGH);
+
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("DHT22:");
@@ -321,11 +324,7 @@ void loop() {
   }
   
   if(char key = keypad.getKey()) {
-    if (key == NO_KEY) {
-      // Handle no key press
-    }
-    else {
-      keypadEvent(key);
-    }
+    if (key == NO_KEY) { /*Handle no key press*/ }
+    else { keypadEvent(key); }
   }
 }
