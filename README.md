@@ -44,7 +44,7 @@ This project implements a temperature regulator system using an Arduino microcon
 
 ## Circuit Diagram
 
-
+![Circuit Diagram](documentation/images/circuit_diagram.png)
 
 ---
 
