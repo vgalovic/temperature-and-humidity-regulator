@@ -96,6 +96,7 @@ This project implements a temperature regulator system using an Arduino microcon
 - `DEBUG_SERIAL_BAUDRATE`: Baud rate for serial communication in debug mode.
 - `DEBOUNCE_TIME`: Debounce time for the keypad.
 - `BUZZER_DELAY`: Delay time for the buzzer.
+- `DELAY_IN_SETUP`: Delay on the end of `setup()`.
 - `DHT_UPDATE_INTERVAL`: Interval for updating temperature and humidity readings from the DHT22 sensor.
 - `FAN_SPEED_UPDATE_INTERVAL`: Interval for updating the fan speed based on temperature.
 
