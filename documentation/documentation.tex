@@ -1,5 +1,5 @@
 \documentclass[a4paper, 12pt]{article}
-\usepackage[margin = 2cm]{geometry}
+\usepackage[margin = 2.5cm]{geometry}
 
 \usepackage[utf8]{inputenc}
 \usepackage[OT2, T1]{fontenc}
@@ -7,10 +7,12 @@
 \usepackage[none]{hyphenat}
 
 \usepackage{amsfonts, amssymb, amsmath}
-\usepackage{graphicx, float, enumitem, hyperref}
+\usepackage{graphicx, float, enumitem, hyperref, chngcntr, ragged2e}
 
 \usepackage{listings}          % for creating language style
 \input{arduinoLanguage.tex}    % adds the arduino language listing
+
+\counterwithout{enumi}{section}
 
 %% Define an Arduino style fore use later %%
 \lstdefinestyle{Arduino}{
@@ -104,6 +106,9 @@ Vladimir Galović (EE 210/2018) i Stefan Ostojić (EE 216/2016)\\
 \tableofcontents
 \pagebreak
 
+\begingroup
+\justifying
+
 \section{Uvod}
 
 \vspace{10pt}
@@ -112,13 +117,14 @@ Regulacija temperature i vlažnosti vazduha
 
 \vspace{10pt}
 
-Ova tema je izabrana zbog interesovanja za rad sa DHT22 senzorom dok su sve ostale funkcionalnosti dodate tokom realizacije projekta. Sa ovim snezorom kao prvom tačkom projekta izabran je problem čitanja i regulisanja temperature i vlažnosti vazduha neke zatvorene sredine poput nekog skadišta gde je održavanje temperature i vlažnosti bitno. Primer za ovakav uređaj je humidor za cigare koji održva konstantnu temperaturu (16-22 °C) i vlažnost (60-75 \%) kako bi održao kvalitet cigare (Slika 1).
+Ova tema je izabrana zbog interesovanja za rad sa DHT22 senzorom dok su sve ostale funkcionalnosti dodate tokom realizacije projekta. Sa ovim snezorom kao prvom tačkom projekta izabran je problem čitanja i regulisanja temperature i vlažnosti vazduha neke zatvorene sredine poput nekog skadišta gde je održavanje temperature i vlažnosti bitno. Primer za ovakav uređaj je humidor za cigare koji održva konstantnu temperaturu (16-22 °C) i vlažnost (60-75 \%) kako bi održao kvalitet cigare (Slika \ref{primer}).
 
 \vspace{10pt}
 
   Zarad brze i lake realizacije kao osnovna kontrolna jedinica izabrana je Arduiono pltforma koja pruža puno fleksibilnosti. Za aktuator je izabran BLDC motor sa ventilatorom koji bi najbrže uticao na regulisanje temperature i vlažnosti. LCD displej i tastatura su dodate radi lakše interakcije sa korisnikom, a uloga zujalice je da upozori korisnika na prevelike ili premale vrednosti vlažnosti vazduha. 
 
 \vspace{10pt}
+
 
 Realizacija i upoznavanje sa svim karakteristikama komopnenti je započeta povezivanjem osnovih elemenata na protoboard i Arduino UNO. Pojedinačnim upoznavanjem sa svakom komponentom je smišljen krajni koncept projekta. Kao i ideje za adekvatano testiranje senzora i aktuatora. 
 
@@ -128,10 +134,14 @@ Realizacija i upoznavanje sa svim karakteristikama komopnenti je započeta povez
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.13]{images/primer}
-\caption{humidor za cigare}
+\caption{humidor za cigare} \label{primer}
 \end{figure}
 
 \pagebreak
+\endgroup
+
+\begingroup
+\justifying
 
 \section{Analiza problema}
 
@@ -143,7 +153,7 @@ Za povećanje temperature se koriste grejači, a za povećnje vlažnosti vazduha
 
 \vspace{10pt}
 
-Zarad pojednostavljivanja i lakše realizacije fokus se stavlja samo na proces smanjivanja temperature i vlažnosti vazduha. Za ovaj proces je samo potreban jedan aktuator. Koji je u primeru ovog projekta BLDC motor sa ventilatorom. Dok bi u procesu povećanja temperature i vlažnosti vazduha morali da imam bar dva aktuatora. Grejač i neki sistem vodenih pumpi koji bi distribuitao vodu u odgarajućoj meri. Čime bi se obim i kompleksnost ovog projekta znatno povećao. Ovim pojednostaviljanjem dolazi i do promena merenih vrenosti jer bez dodatnih komponenti naša sredina neće održavati temperaturu i vlažnost kao Hunidor nego kao srednju vrednost prostorije.
+Zarad pojednostavljivanja i lakše realizacije fokus se stavlja samo na proces smanjivanja temperature i vlažnosti vazduha. Za ovaj proces je samo potreban jedan aktuator. Koji je u primeru ovog projekta BLDC motor sa ventilatorom. Dok bi u procesu povećanja temperature i vlažnosti vazduha morali da imam bar dva aktuatora. Grejač i neki sistem vodenih pumpi koji bi distribuitao vodu u odgarajućoj meri. Čime bi se obim i kompleksnost ovog projekta znatno povećao. Ovim pojednostaviljanjem dolazi i do promena merenih vrenosti jer bez dodatnih komponenti naša sredina neće održavati temperaturu i vlažnost kao Hunidor nego kao srednju vrednost prostorije. U tabeli \ref{tabela-1} može se videti razlika između promena mernih vrednost Humidora i ovog projekta.
 
 \vspace{10pt}
 
@@ -158,7 +168,7 @@ Humidor & 60 - 75 \% & 16 - 22 °C\\
 Srednja vrednost prostorije & 30 - 80 \% & 26 - 30 °C\\
 \hline
 \end{tabular}
-\caption{Promea merenih vrednosti}
+\caption{Promea merenih vrednosti} \label{tabela-1}
 \end{table}
 
 Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i vlažnosti vazduha, iako u suženom obliku. Dok sve ostale komponente doprinose boljoj interakciji korisnika sa uređajom. Regulacija je glavni cilj, dok je interfejs sporedni.
@@ -171,7 +181,9 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 %\vspace{10pt}
 
 \pagebreak
+\endgroup
 
+\begingroup
 \section{Hardverska realizacija projekta}
 
 \vspace{10pt}
@@ -198,108 +210,211 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 \vspace{10pt}
 
 \pagebreak
+\endgroup
+
+\begingroup
+\sloppy
 
 \section{Softverska realizacija projekta}
 
 \vspace{10pt}
 
-	\subsection{Biblioteke}
+U ovom polavlju se govori u kratkim crtama o kodu koji pokreće hardver projekta. Kod je izrađen u Arduino okruženju, a nalazi se na \texttt{\href{https://github.com/vgalovic/temperature-and-humidity-regulator.git}{Github repozitorijumu}}. Kod projekta se nalazi u  \texttt{\href{https://github.com/vgalovic/temperature-and-humidity-regulator/blob/main/code/code.ino}{code/code.ino}}. Evo detaljnog objašnjenja korisničkog interfejsa:
+ 
+\begin{enumerate}
 
+	\item \texttt{Tastatura}: Korisnik može koristiti tastaturu sa četiri reda i dva stubca za navigaciju i izbor opcija. Na tastaturi su raspoređeni tasteri od 1 do 8 koji imaju različite funkcije:
+	\begin{itemize}
+		\item Tasteri od 1 do 4 služe za odabir različitih režima rada sistema, uključujući prebacivanje između prikaza temperature/vlažnosti i brzine ventilatora/stanja zvučnog alarma, kao i testiranje brzine ventilatora i zvučnog alarma.
+        \item Tasteri 5 i 6 se koriste za uključivanje i isključivanje debug moda i podešavanje prilagođenih parametara za granice vlažnosti i temperature.
+        \item Taster 8 se koristi za čišćenje LCD ekrana.
+	\end{itemize}
+	
+	
+  	\item \texttt{LCD ekran}: Na LCD ekranu su prikazane različite informacije o sistemu:
+  	\begin{itemize}
+  		\item Temperatura i vlažnost: Prikazuje se trenutna temperatura u stepenima Celzijusa i vlažnost u procentima.
+       	\item Brzina ventilatora i stanje zvučnog alarma: U ovom režimu se prikazuju informacije o brzini ventilatora (izražene u procentima) i stanju zvučnog alarma (uključen ili isključen).
+		\item Indikacija Testiranja ventilatora/zvučnog alarma
+  	\end{itemize}
+  	
+  	\item \texttt{ Serijal port}: Dijagnostički podaci u debug modu: Kada je debug mod aktiviran, prikazuju se dijagnostičke informacije preko serijskog porta, dok na LCD ekranu je ispisana brzina prenosa bita po sekundi.
+\end{enumerate}
+
+U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljive i funkcije kao i objšnjenje šta oni rade unutar koda.
+    
 \vspace{10pt}
-	
-\begin{itemize}
-	\item Keypad
-	\item LiquidCrystal\_I2C
-	\item DHT22
-	
-\end{itemize}			
 
-\pagebreak
+	\subsection{Biblioteke}
+	\begin{itemize}
+    		\item \textbf{Keypad}: Koristi se za interakciu sa tastaturom. Github stranica do ove biblioteke je na sledećem \texttt{\href{https://github.com/Chris--A/Keypad.git}{linku}}.
+    		
+    		\item \textbf{LiquidCrystal\_I2C}: Pomoću nje se kontroliše LCD putem I2C komunikacije. Stranica sajta arduina za preuzimanje biblioteke nalazi se na sledećem \texttt{\href{https://downloads.arduino.cc/libraries/github.com/marcoschwartz/LiquidCrystal_I2C-1.1.2.zip}{linku}}. 
+    		
+    		\item \textbf{DHT22}: Omogućava čitanje podataka sa DHT22 senzora. Github stranica do ove biblioteke je na sledećem \texttt{\href{https://github.com/Chris--A/Keypad.git}{linku}}.
+	\end{itemize}
+
+\newpage
 
 	\subsection{Makroi}
 
-\vspace{10pt}
-
-\begin{enumerate}
-	\item Pinovi tastature
-	\begin{itemize}
-		\item R1, R2
-		\item C1, C2, C3, C4
-	\end{itemize}
-
-	\item Podešavanja LCD-a
-	\begin{itemize}
-		\item i2cPort
-		\item totalColumns, totalRows
-	\end{itemize}
-	
-	\item debug i tajming
-	\begin{itemize}
-		\item {\small DEBUG\_SERIAL\_BAUDRATE}
-		\item D{\small EBOUNCE\_TIME}
-		\item {\small BUZZER\_DELAY}
-		\item {\small DELAY\_IN\_SETUP}
-		\item {\small DHT\_UPDATE\_INTERVAL}
-		\item{\small  FAN\_SPEED\_UPDATE\_INTERVAL}
-	\end{itemize}
-	
-	\item Prilagođavanje temeprature i vlažnosti vazduha
-	\begin{itemize}	
-		\item {\small HUMIDITY\_MIN\_LOWER\_LIMIT, HUMIDITY\_MIN\_UPPER\_LIMIT}
-		\item {\small HUMIDITY\_MAX\_LOWER\_LIMIT, HUMIDITY\_MAX\_UPPER\_LIMIT}
-		\item {\small TEMPERATURE\_MIN\_LOWER\_LIMIT, TEMPERATURE\_MIN\_UPPER\_LIMIT}
-	\end{itemize}	
-	
-	\item koraci prilagođavanja
-	\begin{itemize}
-		\item {\small HUMIDITY\_STEP, TEMPERATURE\_STEP}
-	\end{itemize}			
-\end{enumerate}
-	
-\pagebreak
-
-	\subsection{Variable}
 
 \vspace{10pt}
 
 \begin{enumerate}
-	\item action\_state
+
+	\item \textbf{Pinske Definicije Tastature}:
+
 	\begin{itemize}
-		\item {\small NORMAL\_DISPLAY}
-    		\item {\small DEBUG\_MODE}
-    		\item {\small FAN\_TEST}
-    		\item {\small  BUZZER\_TEST}
+    		\item \texttt{R1}, \texttt{R2}: Brojevi pinova za konekciju redova tastature.
+    		\item \texttt{C1}, \texttt{C2}, \texttt{C3}, \texttt{C4}: Brojevi pinova za konekciju kolona tastature.
 	\end{itemize}
-   
-	\item display\_state
-	\item debug\_enable
-	\item humidity\_min, humidity\_max, temperature\_min
-	\item en\_mill
-  
+
+	\item \textbf{Dimenzije Tastature}:
+	\begin{itemize}
+    		\item \texttt{ROWS}, \texttt{COLS}: Broj redova i kolona u matrici tastature.
+	\end{itemize}
+
+	\item \textbf{Pinovi}:
+	\begin{itemize}
+    		\item \texttt{PWM, BUZZ, DHT}: Pinovi za PWM, zvučnik i DHT22 senzor.
+	\end{itemize}
+
+	\item \textbf{Koraci Prilagođavanja}:
+	\begin{itemize}
+    		\item \texttt{HUMIDITY\_STEP}, \texttt{TEMPERATURE\_STEP}: Veličine koraka za prilagođavanje granica vlažnosti i temperature.
+	\end{itemize}
+
+	\item \textbf{Debug i Vremenski Parametri}:
+	\begin{itemize}
+		\item \texttt{DEBUG\_SERIAL\_BAUDRATE}: Brzina prenosa bita po sekundi za serijsku komunikaciju u debug režimu.
+		\item \texttt{DEBOUNCE\_TIME}: Vreme debaunsa za tastaturu.
+		\item \texttt{BUZZER\_DELAY}: Vreme kašnjenja za zvučnik.
+		\item \texttt{DELAY\_IN\_SETUP}: Kašnjenje na kraju \texttt{setup()} funkcije.
+		\item \texttt{DHT\_UPDATE\_INTERVAL}: Interval za ažuriranje temperatura i vlažnosti sa DHT22 senzora.
+		\item \texttt{FAN\_SPEED\_UPDATE\_INTERVAL}: Interval za ažuriranje brzine ventilatora na osnovu temperature.
+	\end{itemize}
+	
+	
+	\item \textbf{Podrazumevane Vrednosti}:
+	\begin{itemize}
+    		\item \texttt{DEFAULT\_HUMIDITY\_MIN}, \texttt{DEFAULT\_HUMIDITY\_MAX},\\ \texttt{DEFAULT\_TEMPERATURE\_MIN}:
+    		\\ Podrazumevane minimalne i maksimalne granice vlažnosti i podrazumevana minimalna granica temperature.
+	\end{itemize}
+
+
+	\item \textbf{Prilagođavanje Vlažnosti i Temperature}:
+	\begin{itemize}
+    		\item \texttt{HUMIDITY\_MIN\_LOWER\_LIMIT}, \texttt{HUMIDITY\_MIN\_UPPER\_LIMIT}:\\ Donja i gornja granica za prilagođavanje minimalne granice vlažnosti.
+    		\item \texttt{HUMIDITY\_MAX\_LOWER\_LIMIT}, \texttt{HUMIDITY\_MAX\_UPPER\_LIMIT}:\\ Donja i gornja granica za prilagođavanje maksimalne granice vlažnosti.
+    		\item \texttt{TEMPERATURE\_MIN\_LOWER\_LIMIT}, \texttt{TEMPERATURE\_MIN\_UPPER\_LIMIT}:\\ Donja i gornja granica za prilagođavanje minimalne granice temperature.
+	\end{itemize}
+
+	\item \textbf{Koraci Prilagođavanja}:
+	\begin{itemize}
+    		\item \texttt{HUMIDITY\_STEP}, \texttt{TEMPERATURE\_STEP}: Veličine koraka za prilagođavanje granica vlažnosti i temperature.
+	\end{itemize}
 
 \end{enumerate}
 
-\pagebreak
+
+	\subsection{Promenljive}
+
+\vspace{10pt}
+
+\begin{enumerate}
+    \item \textbf{action\_state}:
+        \begin{itemize}
+            \item \textbf{Tip}: Enumeracija
+            \item \textbf{Opis}: Predstavlja trenutno stanje sistema. Moguća stanja uključuju:
+                \begin{itemize}
+                    \item \texttt{NORMAL\_DISPLAY}: Normalni prikaz za prikazivanje temperatura i vlažnosti vazdiha ili brzinu ventilatora i stanje zvučnika.
+                    \item \texttt{DEBUG\_MODE}: Režim za debagiranje za prikaz dijagnostičkih informacija sa DHT22 senzora.
+                    \item \texttt{FAN\_TEST}: Režim za testiranje brzine ventilatora.
+                    \item \texttt{BUZZER\_TEST}: Režim za testiranje zvučnika.
+                \end{itemize}
+        \end{itemize}
+        
+    \item \textbf{display\_state}:
+        \begin{itemize}
+            \item \textbf{Tip}: Logička
+            \item \textbf{Opis}: Kontroliše da li LCD ekran prikazuje očitavanja temperature i vlažnosti (\texttt{true}) ili brzinu ventilatora i stanje zvučnika (\texttt{false}).
+        \end{itemize}
+        
+    \item \textbf{debug\_enable}:
+        \begin{itemize}
+            \item \textbf{Tip}: Logička
+            \item \textbf{Opis}: Određuje da li je režim za debagiranje omogućen (\texttt{true}) ili nije (\texttt{false}), što omogućava dijagnostičke informacije sa DHT22 senzora.
+        \end{itemize}
+        
+    \item \textbf{humidity\_min}, \textbf{humidity\_max}, \textbf{temperature\_min}:
+        \begin{itemize}
+            \item \textbf{Tip}: Broj (Unsigned 8-bit integer)
+            \item \textbf{Opis}: Definiše minimalne i maksimalne pragove vlažnosti (\textbf{humidity\_min}, \textbf{humidity\_max}) i minimalni prag temperature (\textbf{temperature\_min}) za sistem.
+        \end{itemize}
+        
+    \item \textbf{en\_mill}:
+        \begin{itemize}
+            \item \textbf{Tip}: Unsigned long
+            \item \textbf{Opis}: Čuva trenutno vreme u milisekundama za potrebe vremenskog merenja u glavnoj petlji.
+        \end{itemize}
+\end{enumerate}
+
+\newpage
 
 	\subsection{Funkcije}
 
 \vspace{10pt}
 
-\begin{enumerate}
-
-	\item buzzControl(humidity)
-	\item dcFanControl(temperature)
-	\item display()
-	\item debugMode()
-	\item action()
-	\item keypadEvent(key)
-	\item setparameters()
-	\item setup()
-	\item loop()
-
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+    \item \textbf{buzzControl(humidity)}:
+        \begin{enumerate}[label={},leftmargin=*]
+            \item Proverava da li vlažnost pada ispod minimalnog praga ili prelazi preko maksimalnog praga i aktivira zvučnik prema tome. Vraća \texttt{true} ako je zvučnik aktiviran.
+        \end{enumerate}
+        
+    \item \textbf{dcFanControl(temperature)}:
+        \begin{enumerate}[label={},leftmargin=*] 
+            \item Prilagođava brzinu ventilatora na osnovu temperature. Vraća procenat brzine ventilatora.
+        \end{enumerate}
+        
+    \item \textbf{display()}:
+        \begin{enumerate}[label={},leftmargin=*]
+            \item Dobavlja očitavanja temperature i vlažnosti vazduha sa DHT22 senzora, kontroliše brzinu ventilatora i stanje zvučnika, i prikazuje relevantne informacije na LCD ekranu.
+        \end{enumerate}
+        
+    \item \textbf{debugMode()}:
+        \begin{enumerate}[label={},leftmargin=*] 
+            \item Prikazuje dijagnostičke informacije sa DHT22 senzora u režimu za debagiranje.
+        \end{enumerate}
+        
+    \item \textbf{action()}:
+        \begin{enumerate}[label={},leftmargin=*] 
+            \item Vrši akcije na osnovu trenutnog stanja sistema, uključujući prikaz normalnih informacija, ulazak u režim za debagiranje ili izvođenje testova ventilatora i zvučnika.
+        \end{enumerate}
+        
+    \item \textbf{keypadEvent(key)}:
+        \begin{enumerate}[label={},leftmargin=*] 
+            \item Upravlja događajima tastature i izvodi odgovarajuće akcije na osnovu pritisnutog tastera.
+        \end{enumerate}
+        
+    \item \textbf{setParameters()}:
+        \begin{enumerate}[label={},leftmargin=*] 
+            \item Omogućava korisnicima postavljanje prilagođenih parametara za pragove vlažnosti i temperature koristeći tastaturu.
+        \end{enumerate}
+        
+    \item \textbf{setup()}:
+        \begin{enumerate}[label={},leftmargin=*] 
+            \item Inicijalizuje sistem, uključujući postavljanje pinova, LCD ekrana i inicijalizaciju parametara.
+        \end{enumerate}
+        
+    \item \textbf{loop()}:
+        \begin{enumerate}[label={},leftmargin=*] 
+            \item Glavna petlja sistema, gde se akcije vrše periodično na osnovu vremenskih intervala.
+        \end{enumerate}
 \end{enumerate}
 
 \pagebreak
+\endgroup
 
 \section{Rezultati testiranja}
 
@@ -316,6 +431,8 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 %Treba proveriti i u ovom odeljku opisati koliko uređaj uspešno obavlja zadatak za koji je projektovan. To treba potkrepiti merenjima ulaznih test signala, izlaznih signala i unutrašnjih signala koji predstavljaju nekakav međurezultat. Mogu se dati tabele sa rezultatima, frekvencijske karakteristike, slike dobijene pomoću oscilokopa i slično ukoliko to može da koristi u predočavanju performansi.
 \pagebreak
 
+\begingroup
+\justifying
 \section{Zaključak}
 
 \vspace{10pt}
@@ -343,6 +460,10 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 %
 %Treći pasus je obavezan i predstavlja mesto gde mogu ukratko da se navedu ideje koje su se javile tokom izrade projekta ili pisanja rada i predstavljaju dalje moguće pravce razvoja konkretnog uređaja ili nove oblasti koje autor rada namerava u bliskoj budućnosti da istraži.
 \pagebreak
+\endgroup
+
+\begingroup
+\sloppy
 
 \section{Literatura}
 
@@ -355,54 +476,19 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 %Svrha navođenja literature je da se čitoaocu ukaže na mesta gde može naći detaljnije informacije o pojedinostima koje se pominju u tekstu. Takođe, reference ističu da se ovaj rad nadovezuje na neka od ranije poznata znanja. Uobičajeno je da se kategoričke tvrdnje koje se ne dokazuju u ovom radu potkrepljuju navođenjem literature u kojoj je to obrazloženo ili dokazano. U takvim slučajevima se neposredno iza navedene tvrdnje navodi oznaka literature, najčešće ka broj u uglastim zagradama npr. [2] predstavlja pozivanje na knjigu "Infrared Sensors" iz primera literature.
 %
 %
-%\begin{enumerate}[label={[1]},leftmargin=2.5cm]
+\begin{enumerate}[label={[\arabic*]}, leftmargin=2.5cm]
+	\item Datasheet od DHT22 može se naći na linku: \label{ref:DHT22-datasheet}\\ \url{https://cdn-shop.adafruit.com/datasheets/DHT22.pdf}	
+	
 %	\item Ime Prezime Autora, Kuvar elektronike, FTN, Novi Sad, 2008.
 %	\item T. K. Webber, Infrared Sensors, MCMillan, 2002.
-%\end{enumerate}
+\end{enumerate}
+\renewcommand{\theenumi}{\arabic{enumi}}
+
 \pagebreak
+\endgroup
 
-\section*{Dodatak A}
-	\addcontentsline{toc}{section}{Dodatak A}
-
-\vspace{10pt}
-
-%Dodaci su obično obeleženi slovima i tako se na njih i poziva. Poželjno je takođe da svaki dodatak počne na novoj strani.
-%
-%\vspace{10pt}
-%
-%U dodatke mogu da se stave i najvažniji dokumenti koji se odnose na pojedine komponente i podsklopove (kupljenje kao gotove celine) – tzv. Datasheet. 
-%
-%\vspace{10pt}
-%
-%\begin{lstlisting}[style=Arduino]
-%#include <SD.h>
-%
-%File logfile;
-%byte logPin = 10;
-%
-%void setup() {
-%  SD.begin(logPin);
-%
-%  ///////// Create a new file //////////
-%  char filename[] = "LOGGER00.CSV";
-%  for (int i = 0; i < 100; i++) {
-%    filename[6] = i/10 + '0';    // number the file
-%    filename[7] = i%10 + '0';    //
-%    if ( SD.exists(filename)==false ) { // only open a new file if it doesn't exist
-%      logfile = SD.open(filename, FILE_WRITE);
-%      break;  // leave the loop!
-%    }
-%  }
-%}
-%
-%void loop() {
-%  // put your main code here, to run repeatedly:
-%  logfile.println("Hello");
-%  logfile.flush();
-%  delay(1000);
-%}
-%\end{lstlisting}
 \end{document}
+
 
 %\section{Proračuni i simulacioni rezultati}
 %
@@ -461,3 +547,48 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 %\vspace{10pt}
 %
 %Poželjno je u tekst staviti barem jednu sliku gotovog uređaja, čak i ako je on konačno izrađen samo na protobordu. To treba da bude što je moguće reprezentativnija slika koja na očigledan način pokazuje i dokazuje da je uređaj zaista napravljen i da se po mogućstvu vidi i njegova funkcija i način rada.
+
+
+%\begingroup
+%\section*{Dodatak A}
+%	\addcontentsline{toc}{section}{Dodatak A}
+%
+%\vspace{10pt}
+%
+%Dodaci su obično obeleženi slovima i tako se na njih i poziva. Poželjno je takođe da svaki dodatak počne na novoj strani.
+%
+%\vspace{10pt}
+%
+%U dodatke mogu da se stave i najvažniji dokumenti koji se odnose na pojedine komponente i podsklopove (kupljenje kao gotove celine) – tzv. Datasheet. 
+%
+%\vspace{10pt}
+%
+%\begin{lstlisting}[style=Arduino]
+%#include <SD.h>
+%
+%File logfile;
+%byte logPin = 10;
+%
+%void setup() {
+%  SD.begin(logPin);
+%
+%  ///////// Create a new file //////////
+%  char filename[] = "LOGGER00.CSV";
+%  for (int i = 0; i < 100; i++) {
+%    filename[6] = i/10 + '0';    // number the file
+%    filename[7] = i%10 + '0';    //
+%    if ( SD.exists(filename)==false ) { // only open a new file if it doesn't exist
+%      logfile = SD.open(filename, FILE_WRITE);
+%      break;  // leave the loop!
+%    }
+%  }
+%}
+%
+%void loop() {
+%  // put your main code here, to run repeatedly:
+%  logfile.println("Hello");
+%  logfile.flush();
+%  delay(1000);
+%}
+%\end{lstlisting}
+%\endgroup
