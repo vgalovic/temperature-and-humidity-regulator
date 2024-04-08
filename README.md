@@ -164,7 +164,7 @@ This project implements a temperature regulator system using an Arduino microcon
 
 - **keypadEvent(key)**: Handles keypad events and performs corresponding actions based on the pressed key.
 
-- **set_parameters()**: Allows users to set custom parameters for humidity and temperature thresholds using the keypad.
+- **setParameters()**: Allows users to set custom parameters for humidity and temperature thresholds using the keypad.
 
 - **setup()**: Initializes the system, including setting up pins, LCD display, and initializing parameters.
 

@@ -94,7 +94,7 @@ void display();
 void debugMode();
 void action();
 void keypadEvent(char key);
-void set_parameters();
+void setParameters();
 void setup();
 void loop();
 
@@ -245,7 +245,7 @@ void keypadEvent(char key) {
       case '3': action_state = (action_state == NORMAL_DISPLAY || action_state == BUZZER_TEST) ? FAN_TEST : NORMAL_DISPLAY; break;
       case '4': action_state = (action_state == NORMAL_DISPLAY || action_state == FAN_TEST) ? BUZZER_TEST : NORMAL_DISPLAY; break;
       case '5': debug_enable = !debug_enable; action_state = DEBUG_MODE; break;
-      case '6': action_state = DEBUG_MODE; debug_enable = false; set_parameters(); break;
+      case '6': action_state = DEBUG_MODE; debug_enable = false; setParameters(); break;
       case '8': lcd.clear(); return;
       default: return;
     }
@@ -256,7 +256,7 @@ void keypadEvent(char key) {
 /**
  * @brief Allows setting custom parameters for humidity and temperature limits
  */
-void set_parameters() {
+void setParameters() {
   analogWrite(PWM, 0);
   digitalWrite(BUZZ, HIGH);
   
