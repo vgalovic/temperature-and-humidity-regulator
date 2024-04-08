@@ -203,43 +203,101 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 
 \vspace{10pt}
 
-	\subsection{buzzControl(humidity)}
+	\subsection{Biblioteke}
 
 \vspace{10pt}
-
-
-	\subsection{dcFanControl(temperature)}
-
-\vspace{10pt}
-
-	\subsection{display()}
-
-\vspace{10pt}
-
-	\subsection{debugMode()}
 	
-\vspace{10pt}
+\begin{itemize}
+	\item Keypad
+	\item LiquidCrystal\_I2C
+	\item DHT22
+	
+\end{itemize}			
 
-	\subsection{action()}
+\pagebreak
 
-\vspace{10pt}
-
-	\subsection{keypadEvent(key)}
-
-\vspace{10pt}
-
-
-	\subsection{setparameters()}
+	\subsection{Makroi}
 
 \vspace{10pt}
 
-	\subsection{setup()}
+\begin{enumerate}
+	\item Pinovi tastature
+	\begin{itemize}
+		\item R1, R2
+		\item C1, C2, C3, C4
+	\end{itemize}
+
+	\item Podešavanja LCD-a
+	\begin{itemize}
+		\item i2cPort
+		\item totalColumns, totalRows
+	\end{itemize}
+	
+	\item debug i tajming
+	\begin{itemize}
+		\item {\small DEBUG\_SERIAL\_BAUDRATE}
+		\item D{\small EBOUNCE\_TIME}
+		\item {\small BUZZER\_DELAY}
+		\item {\small DELAY\_IN\_SETUP}
+		\item {\small DHT\_UPDATE\_INTERVAL}
+		\item{\small  FAN\_SPEED\_UPDATE\_INTERVAL}
+	\end{itemize}
+	
+	\item Prilagođavanje temeprature i vlažnosti vazduha
+	\begin{itemize}	
+		\item {\small HUMIDITY\_MIN\_LOWER\_LIMIT, HUMIDITY\_MIN\_UPPER\_LIMIT}
+		\item {\small HUMIDITY\_MAX\_LOWER\_LIMIT, HUMIDITY\_MAX\_UPPER\_LIMIT}
+		\item {\small TEMPERATURE\_MIN\_LOWER\_LIMIT, TEMPERATURE\_MIN\_UPPER\_LIMIT}
+	\end{itemize}	
+	
+	\item koraci prilagođavanja
+	\begin{itemize}
+		\item {\small HUMIDITY\_STEP, TEMPERATURE\_STEP}
+	\end{itemize}			
+\end{enumerate}
+	
+\pagebreak
+
+	\subsection{Variable}
 
 \vspace{10pt}
 
-	\subsection{loop()}
+\begin{enumerate}
+	\item action\_state
+	\begin{itemize}
+		\item {\small NORMAL\_DISPLAY}
+    		\item {\small DEBUG\_MODE}
+    		\item {\small FAN\_TEST}
+    		\item {\small  BUZZER\_TEST}
+	\end{itemize}
+   
+	\item display\_state
+	\item debug\_enable
+	\item humidity\_min, humidity\_max, temperature\_min
+	\item en\_mill
+  
+
+\end{enumerate}
+
+\pagebreak
+
+	\subsection{Funkcije}
 
 \vspace{10pt}
+
+\begin{enumerate}
+
+	\item buzzControl(humidity)
+	\item dcFanControl(temperature)
+	\item display()
+	\item debugMode()
+	\item action()
+	\item keypadEvent(key)
+	\item setparameters()
+	\item setup()
+	\item loop()
+
+\end{enumerate}
 
 \pagebreak
 
