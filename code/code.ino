@@ -17,11 +17,11 @@
 #define COLS 4 /**< Number of keypad columns */
 
 // I2C address of LCD
-#define i2cPort 0x27 /**< I2C address of LCD */
+#define I2C_PORT 0x27 /**< I2C address of LCD */
 
 // Number of rows and columns on LCD
-#define totalColumns 16 /**< Total number of columns on the LCD */
-#define totalRows 2 /**< Total number of rows on the LCD */
+#define TOTAL_COLUMNS 16 /**< Total number of columns on the LCD */
+#define TOTAL_ROWS 2 /**< Total number of rows on the LCD */
 
 #define PWM 10 /**< PWM pin for controlling the fan speed */
 #define BUZZ 11 /**< Buzzer pin */
@@ -65,7 +65,7 @@ byte rowPins[ROWS] = {R1, R2}; /**< Array of row pins */
 byte colPins[COLS] = {C1, C2, C3, C4}; /**< Array of column pins */
 
 Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); /**< Keypad object */
-LiquidCrystal_I2C lcd(i2cPort, totalColumns, totalRows); /**< LCD object */
+LiquidCrystal_I2C lcd(I2C_PORT, TOTAL_COLUMNS, TOTAL_ROWS); /**< LCD object */
 DHT22 dht(DHT); /**< DHT22 sensor object */
 
 unsigned long en_mill; /**< Time variable for timing */

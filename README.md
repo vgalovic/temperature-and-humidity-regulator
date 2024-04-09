@@ -90,8 +90,8 @@ This project implements a temperature regulator system using an Arduino microcon
 
 ### LCD Configuration
 
-- `i2cPort`: I2C address of the LCD display.
-- `totalColumns`, `totalRows`: Number of columns and rows on the LCD display.
+- `I2C_PORT`: I2C address of the LCD display.
+- `TOTAL_COLUMNS`, `TOTAL_ROWS`: Number of columns and rows on the LCD display.
 
 ### Pin Numbers
 
