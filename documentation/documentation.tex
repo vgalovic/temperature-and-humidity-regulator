@@ -258,7 +258,6 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 
 	\subsection{Makroi}
 
-
 \vspace{10pt}
 
 \begin{enumerate}
@@ -274,7 +273,11 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 	\begin{itemize}
     		\item \texttt{ROWS}, \texttt{COLS}: Broj redova i kolona u matrici tastature.
 	\end{itemize}
-
+	\item \textbf{LCD Konfiguracija}:
+	\begin{itemize}
+		\item \texttt{I2C\_PORT}: I2C adresa LCD ekrana.
+    		\item \texttt{TOTAL\_COLUMNS}, \texttt{TOTAL\_ROWS}: Broj kolona i redova na LCD ekranu.
+	\end{itemize}
 	\item \textbf{Pinovi}:
 	\begin{itemize}
     		\item \texttt{PWM, BUZZ, DHT}: Pinovi za PWM, zvučnik i DHT22 senzor.
@@ -302,6 +305,7 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
     		\\ Podrazumevane minimalne i maksimalne granice vlažnosti i podrazumevana minimalna granica temperature.
 	\end{itemize}
 
+\pagebreak
 
 	\item \textbf{Prilagođavanje Vlažnosti i Temperature}:
 	\begin{itemize}
