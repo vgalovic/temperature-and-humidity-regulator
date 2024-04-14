@@ -6,6 +6,8 @@
 \usepackage[english, serbian]{babel}
 \usepackage[none]{hyphenat}
 
+\usepackage{wrapfig}
+
 \usepackage{amsfonts, amssymb, amsmath}
 \usepackage{graphicx, float, enumitem, hyperref, chngcntr, ragged2e}
 
@@ -188,24 +190,189 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 
 \vspace{10pt}
 
+U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom projektu. O njihovim osnovnim karakteristika, prednostima i problemima. Mnoge komponente su izabrane zbog lakoće dostupnosti da bi se u slučaju ponovne realzacije ili kavara lako pronašla zamena. Većina komponenti je povezana sa Arduino platformom koja je idealna za realizaciju ovakvih projekata. Glavne prednosti Arduino pltforme :
+
+	\begin{itemize}
+	
+		\item Jednostavnost korišćenja: Arduino je dizajniran da bude jednostavan za upotrebu, čak i za početnike u elektronici i programiranju. Dolazi sa jednostavnom integrisanom razvojnom okolinom (IDE) koja omogućava brzo pisanje, kompajliranje i uploadovanje koda na Arduino mikrokontroler.
+		\item Mala veličina: Arduino je veoma kompaktna platforma, što je čini idealnim za ugradnju u razne uređaje i projekte.
+        \item Niska cena: Arduino pločice su veoma pristupačan, što ga čini odličnim izborom za hobiste, učenike i sve one koji žele da istražuju tehnologiju bez velikih finansijskih ulaganja.
+        \item Širok spektar modela: Postoje različiti modeli Arduino pločica, od osnovnih do naprednih, sa različitim brojem ulazno/izlaznih pinova, radnim naponima i drugim karakteristikama. To omogućava korisnicima da odaberu pločicu koja najbolje odgovara njihovom projektu. Za ovaj projekat izabran je Arduino UNO R3 model.
+        \item Mogućnost proširenja: Arduino pločice imaju mogućnost proširenja putem širokog spektra dodatnih modula, senzora, aktuatora i drugih komponenti koji se lako povezuju putem standardizovanih interfejsa kao što su digitalni i analogni pinovi, I2C, SPI, UART itd.
+        \item Bogata podrška : Arduino ima ogromnu zajednicu korisnika i razvijalaca koji su voljni da dele svoje iskustva, znanje i projekte putem foruma, blogova, YouTube kanala i drugih platformi. Obilje  online resursa drastično olakšava učenje i rešavanje mnogih problema.
+        \item Fleksibilnost i prilagodljivost: Arduino se može koristiti za različite svrhe, od jednostavnih projekata poput LED svetla ili automatskog zalivanja biljaka do složenijih projekata kao što su roboti, interaktivne instalacije ili kućna automatizacija. 
+       
+	\end{itemize}
+
+\vspace{10pt}
+
+Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće se ulaziti dataljnije u rad Arduono UNO R3 uređaja jer je to van okvira ovog projeta. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.17]{images/Arduino UNO R3}
+\caption{Arduino UNO R3} \label{Arduino UNO R3}
+\end{figure}
+
+\pagebreak
+
+
 	\subsection{DHT22}
 
 \vspace{10pt}
 
+Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat je senzor temperature i vlažnosti vazduha DHT22. Ovo je jedini senzor u ovom projekt i bilo je od velike važnosti da se izabere relativno precizan i pouzdan senzor. Zato nije izabran možda i više zatupljen senzor DHT11 koji ima manju preciznost. Dimenzije senzora iznose 36x16x9mm (DxŠxV). DHT22 poseduje 3 pina: VCC (5V), DAT (D12) pin i GND. Osnovne karakteristike senzora su:
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{images/dht22pinssch}
+\caption{DHT22 senzor i njegov šematik} \label{dht22pinssch}
+\end{figure}
+
+\begin{itemize}
+	\item Merenje temperature: DHT22 senzor omogućava precizno merenje temperature u opsegu od -40°C do +80°C sa tačnošću od ±0.5°C.
+	\item Merenje vlage: Osim temperature, DHT22 senzor takođe meri relativnu vlažnost vazduha u opsegu od 0\% do 100\% sa tačnošću od ±2\%.
+	\item Digitalni izlaz (8-bit): DHT22 senzor koristi digitalni interfejs za komunikaciju sa mikrokontrolerom, što olakšava integraciju u različite projekte.
+	\item Jednostavno korišćenje: DHT22 senzor se lako povezuje sa mikrokontrolerima kao što su Arduino ili Raspberry Pi putem samo tri žice (napajanje, zemlja i digitalni signal).
+	\item Pouzdanost: DHT22 senzor je relativno pouzdan i precizan u merenju temperature i vlage, što ga čini popularnim izborom za mnoge aplikacije.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+& Uslov & Min & Tpično & Max & Jedinica\\
+\hline
+Napon & DC & 3.3 & 5 & 5.5 & V\\
+\hline
+Struja & Merena & 1.3 & 1.5 & 2.1 & mA\\
+\hline
+Struja & Prosečna & 0.5 & 0.8 & 1.1 & mA\\
+\hline
+Period kolektovanja & Vreme & 1.7 &  & 2 & Sekunde\\
+\hline
+\end{tabular}
+\caption{Električne karakteristike DHT22} \label{tabela-2}
+\end{table}
+
+Mane ovog senzora: 
+\begin{itemize}
+\item Brzina odgovora: DHT22 senzor može imati nešto sporiji odgovor u poređenju sa nekim drugim senzorima, što može biti problem u aplikacijama koje zahtevaju brze promene.
+\item Osetljivost na kondenzaciju: U uslovima visoke vlažnosti, DHT22 senzor može pokazivati greške zbog kondenzacije vode na površini senzora.
+\end{itemize}
+\pagebreak
 
 	\subsection{BLDC 5V ventilator}
+	
+	\vspace{10pt}
+	
+
+	
+	Glavni aktuator ovog projekta je BLDC ventilator od 5V. Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
+	
+
+
+%Glavni aktuator ovog projekta je BLDC ventilator od 5V. Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
+\begin{itemize}
+	\item Radni napon: 5V
+	\item Snaga: 3.6W
+	\item Konekcija: 2 pina
+	\item Dimenzije: 40x40x10mm
+\end{itemize}
+
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.15]{images/DC40mm5V}
+%\caption{Ventilator} \label{DC40mm5V}
+%\end{figure}
+
+	\begin{wrapfigure}{l}{0.4\textwidth}
+\includegraphics[scale=0.2]{images/DC40mm5V}
+\caption{Ventilator} \label{DC40mm5V}
+\label{fig:wrapfig}
+\end{wrapfigure}
+\vspace{10pt}
+
+
+Prednosti BLDC motora : 
+\begin{itemize}
+	\item Velika brzina obrtanja 
+	\item Veliki obrtni momenat 
+	\item Odlične startne osobine 
+	\item Velika efikasnost 
+	\item Rad bez varničenja  
+	\item Visoka pouzdanost  
+	\item Dug vek eksploatacije
+\end{itemize}
 
 \vspace{10pt}
 
-	\subsection{Piezo zujalica(MH-FMD)}
+Jedina mana BLDC motora je složenost elektronske komutacije. Motoru je potrebna i informacija o ugaonom položaju rotora(stalnog magneta) kako bi spoljašnje drajvesko kolo koje vrši komutaciju, donelo odluku kada treba izvršiti preusmeravanje struje kroz namotaje. Praćenje položaja rotor najčešće se vrši primenom Holovih senzora(senzora magnetnog polja).
+
+Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan korišćenjem  PWM (Pulse Width Modulation) signala i sa jednim 2N2222A NPN tranzistorom. VCC motora je spojen na 5V a GND motora na kolektor tranzistora. Emiter tranzistora se spaja na GND, a baza na D10 pin Arduina sa kojeg se šalje kontrolni signal. Brzina motora je direktna posledica vrednosti fatkora ispune (odnosom trajanja visokog i niskog naponskog nivoa u toku jedne periode) koji se šalje iz Arduina. Za svaki 1°C povećanja merene vrednosi vrednost faktora ispune se povećava za 20\% sve dok ne dođe do 100\% kada ventilator na maxsimalnoj svojoj brzini. 
+
+\pagebreak
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{images/pwm}
+\caption{Primer povećanja faktora ispune u PWM signalu} \label{pwm}
+\end{figure}
+
+	\subsection{Piezo zujalica (MH-FMD)}
+	
+	Ovaj aktuator je dodat kako bi projekat imao još jedan dodatni način inteerakcije sa korisnikom. Princip rada piezoelektrične zujalice je zasnovan na dovođenju struje na piezo-električni diska koji je spojen sa tankom metalnom pločom. Piezo-električni disk osciluje zbog čega dolazi do savijanja metala napred-nazad. To savijanje metala prouzrokuje zvuk. Obično se koristi kao zvični alarm ili uzbuna. Frekvencija je ono što omogućava piezo zujalicu da proizvede zvuk. Evo nekih karakteristika piezo zujalica:
+\begin{itemize}
+	\item Što se brže metal savija, to je veći nivo buke koja se proizvodi.
+	\item Ova stopa se zove frekvencija.
+	\item Što je veća frekvencija, to je veća buka koju čujemo
+	\item Opseg radne temperature od -40°C do 85°C
+	\item Opseg frekvencije ulazne 2-5kHz (kvadratni signal)
+	\item Dimenzije: 32x13x13mm
+\end{itemize}
 
 \vspace{10pt}
+
+	Pasivna zujalica korišćena u ovom projektu poseduje 3 pina: VCC (5V), I/O (D11) pin i GND. Neki od nedostataka su ako je potrbna frfekvencija van opsega zujalice, i nemogućnost zujanja više zujalica u istom trenutku. Zujalica u ovom projektu ima zadatak da upozori korisnika na problematične vrednosti vlažnosti vazduha koju senzor DHT22 meri. U slučaju ovog projekta to su vrednosti od 30\% kao donja granica i 80\% kao gornja.
+	
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.1]{images/buzzer}
+\caption{Piezo-električna zujalica} \label{buzzer}
+\end{figure}
+
+
+\vspace{10pt}
+
 
 	\subsection{LCD I2C 16x2}
 	
-\vspace{10pt}
+	Kao osnovni način prezentovanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 a4 a5 Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
+	
+	\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{images/I2CLCD}
+\caption{LCD 16x2 sa I2C modulon} \label{I2CLCD}
+\end{figure}
+	
+
 
 	\subsection{4x4 tastatura}
+	
+	Poslednji elemenat koji će poboljšati korisničko iskustvo je senzor dodira tj. 4x4 tastatura. Tastatura se sa stoji između dva sloja. Jeden je spoj svih redova, a drugi svih kolini. Pritiskom se pravi kontakt između ova dva sloja čime se i determiniše koji je taster pritisnut. Za sve izabrane funkcionalnosti iskorišćeno je smo prve dve redove i 4 kolone. Tako da od ukupnog broja pinova kojih je 8 ovde se koriste samo 6 (2 za redove i 4 za kolone). Pinovi su spojeni na sledeće portove Arduina C1->D5, C2->D4, C3->D3, C4->D2, R1->D9 i R2->D8.
+	
+\pagebreak
+
+
+	\subsection{4x4 tastatura}
+	
+		\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{images/circuit_diagram}
+\caption{Šematik} \label{circuit_diagram}
+\end{figure}
 
 \vspace{10pt}
 
