@@ -171,7 +171,7 @@ Srednja vrednost prostorije & 30 - 80 \% & 26 - 30 °C\\
 \caption{Promea merenih vrednosti} \label{tabela-1}
 \end{table}
 
-Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i vlažnosti vazduha, iako u suženom obliku. Dok sve ostale komponente doprinose boljoj interakciji korisnika sa uređajom. Regulacija je glavni cilj, dok je interfejs sporedni.
+Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulacija temperature i vlažnosti vazduha, iako u suženom obliku. Dok sve ostale komponente doprinose boljoj interakciji korisnika sa uređajom. Regulacija je glavni cilj, dok je interfejs sporedni.
 
 %Veoma važan deo projektnog rada. Naslov se po potrebi može promeniti, ali suština teksta mora da ostane analiza problema.
 %
@@ -188,7 +188,7 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulavija temperature i
 
 \vspace{10pt}
 
-U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom projektu. O njihovim osnovnim karakteristika, prednostima i problemima. Mnoge komponente su izabrane zbog lakoće dostupnosti da bi se u slučaju ponovne realzacije ili kavara lako pronašla zamena. Većina komponenti je povezana sa Arduino platformom koja je idealna za realizaciju ovakvih projekata. Glavne prednosti Arduino pltforme :
+U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom projektu. O njihovim osnovnim karakteristika, prednostima i problemima. Mnoge komponente su izabrane zbog lake dostupnosti, da bi se u slučaju ponovne realzacije ili kavara lako pronašla zamena. Većina komponenti je povezana sa Arduino platformom koja je idealna za realizaciju ovakvih projekata. Glavne prednosti Arduino pltforme :
 
 	\begin{itemize}
 	
@@ -219,7 +219,7 @@ Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće s
 
 \vspace{10pt}
 
-Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat je senzor temperature i vlažnosti vazduha DHT22. Ovo je jedini senzor u ovom projekt i bilo je od velike važnosti da se izabere relativno precizan i pouzdan senzor. Zato nije izabran možda i više zatupljen senzor DHT11 koji ima manju preciznost. Dimenzije senzora iznose 36x16x9mm (DxŠxV). DHT22 poseduje 3 pina: VCC (5V), DAT (D12) pin i GND. Osnovne karakteristike senzora su:
+Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat je senzor temperature i vlažnosti vazduha DHT22. Ovo je glavni senzor u ovom projekt i bilo je od velike važnosti da se izabere relativno precizan i pouzdan senzor. Zato nije izabran možda i više zatupljen senzor DHT11 koji ima manju preciznost. Dimenzije senzora iznose 36x16x9mm (DxŠxV). DHT22 poseduje 3 pina: VCC (5V), DAT (D12) pin i GND. Osnovne karakteristike senzora su:
 
 \begin{figure}[H]
 \centering
@@ -297,7 +297,7 @@ Prednosti BLDC motora :
 \end{enumerate}
 \endgroup
 \pagebreak
-Jedina mana BLDC motora je složenost elektronske komutacije. Motoru je potrebna i informacija o ugaonom položaju rotora(stalnog magneta) kako bi spoljašnje drajvesko kolo koje vrši komutaciju, donelo odluku kada treba izvršiti preusmeravanje struje kroz namotaje. Praćenje položaja rotor najčešće se vrši primenom Holovih senzora(senzora magnetnog polja).
+Jedina mana BLDC motora je složenost elektronske komutacije. Motoru je potrebna i informacija o ugaonom položaju rotora (stalnog magneta) kako bi spoljašnje drajvesko kolo koje vrši komutaciju, donelo odluku kada treba izvršiti preusmeravanje struje kroz namotaje. Praćenje položaja rotor najčešće se vrši primenom Holovih senzora(senzora magnetnog polja).
 
 \vspace{10pt}
 
@@ -314,7 +314,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{Piezo zujalica (MH-FMD)}
 	
-	Ovaj aktuator je dodat kako bi projekat imao još jedan dodatni način inteerakcije sa korisnikom. Princip rada piezoelektrične zujalice je zasnovan na dovođenju struje na piezo-električni diska koji je spojen sa tankom metalnom pločom. Piezo-električni disk osciluje zbog čega dolazi do savijanja metala napred-nazad. To savijanje metala prouzrokuje zvuk. Obično se koristi kao zvični alarm ili uzbuna. Frekvencija je ono što omogućava piezo zujalicu da proizvede zvuk. Evo nekih karakteristika piezo zujalica:
+	Ovaj aktuator je dodat kako bi projekat imao još jedan dodatni način interakcije sa korisnikom. Princip rada piezoelektrične zujalice je zasnovan na dovođenju struje na piezo-električni disk koji je spojen sa tankom metalnom pločom. Piezo-električni disk osciluje zbog čega dolazi do savijanja metala napred-nazad. To savijanje metala prouzrokuje zvuk. Obično se koristi kao zvični alarm ili uzbuna. Frekvencija je ono što omogućava piezo zujalicu da proizvede zvuk. Evo nekih karakteristika piezo zujalica:
 \begin{itemize}
 	\item Što se brže metal savija, to je veći nivo buke koja se proizvodi.
 	\item Ova stopa se zove frekvencija.
@@ -326,7 +326,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 \vspace{10pt}
 
-	Pasivna zujalica korišćena u ovom projektu poseduje 3 pina: VCC (5V), I/O (D11) pin i GND. Neki od nedostataka su ako je potrbna frfekvencija van opsega zujalice, i nemogućnost zujanja više zujalica u istom trenutku. Zujalica u ovom projektu ima zadatak da upozori korisnika na problematične vrednosti vlažnosti vazduha koju senzor DHT22 meri. U slučaju ovog projekta to su vrednosti od 30\% kao donja granica i 80\% kao gornja.
+	Pasivna zujalica korišćena u ovom projektu poseduje 3 pina: VCC (5V), I/O (D11) pin i GND. Neki od nedostataka su ako je potrebna frekvencija van opsega zujalice, i nemogućnost zujanja više zujalica u istom trenutku. Zujalica u ovom projektu ima zadatak da upozori korisnika na problematične vrednosti vlažnosti vazduha koju senzor DHT22 meri. U slučaju ovog projekta to su vrednosti od 30\% kao donja granica i 80\% kao gornja.
 	
 \begin{figure}[H]
 \centering
@@ -340,7 +340,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{LCD I2C 16x2}
 	
-	Kao osnovni način prezentovanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 a4 a5 Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
+	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
 	
 	\begin{figure}[H]
 \centering
@@ -352,7 +352,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{4x4 tastatura}
 	
-	Poslednji elemenat koji će poboljšati korisničko iskustvo je senzor dodira tj. 4x4 tastatura. Tastatura se sa stoji između dva sloja. Jeden je spoj svih redova, a drugi svih kolini. Pritiskom se pravi kontakt između ova dva sloja čime se i determiniše koji je taster pritisnut. Za sve izabrane funkcionalnosti iskorišćeno je smo prve dve redove i 4 kolone. Tako da od ukupnog broja pinova kojih je 8 ovde se koriste samo 6 (2 za redove i 4 za kolone). Pinovi su spojeni na sledeće portove Arduina C1->D5, C2->D4, C3->D3, C4->D2, R1->D9 i R2->D8.
+	Poslednji elemenat koji će poboljšati korisničko iskustvo je senzor dodira tj. 4x4 tastatura. Tastatura se sa stoji između dva sloja. Jeden je spoj svih redova, a drugi svih kolini. Pritiskom se pravi kontakt između ova dva sloja čime se i determiniše koji je taster pritisnut. Za sve izabrane funkcionalnosti iskorišćeno je smo prve dve redove i 4 kolone. Tako da od ukupnog broja pinova kojih je 8 ovde se koriste samo 6 (2 za redove i 4 za kolone). Pinovi su spojeni na sledeće portove Arduina C1->D5, C2->D4, C3->D3, C4->D2, R1->D9 i R2->D8. Funkcionalnosti tastera biće objašnjne u sledećem poglavlju.
 	
 \pagebreak
 
@@ -376,11 +376,11 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 \vspace{10pt}
 
-U ovom polavlju se govori u kratkim crtama o kodu koji pokreće hardver projekta. Kod je izrađen u Arduino okruženju, a nalazi se na \textbf{\texttt{\href{https://github.com/vgalovic/temperature-and-humidity-regulator.git}{Github repozitorijumu}}}. Kod projekta se nalazi u  \textbf{\texttt{\href{https://github.com/vgalovic/temperature-and-humidity-regulator/blob/main/code/code.ino}{code/code.ino}}}. Evo detaljnog objašnjenja korisničkog interfejsa:
+U ovom poglavlju se govori u kratkim crtama o kodu koji pokreće hardver projekta. Kod je izrađen u Arduino okruženju, a nalazi se na \textbf{\texttt{\href{https://github.com/vgalovic/temperature-and-humidity-regulator.git}{Github repozitorijumu}}}. Kod projekta se nalazi u  \textbf{\texttt{\href{https://github.com/vgalovic/temperature-and-humidity-regulator/blob/main/code/code.ino}{code/code.ino}}}. Evo detaljnog objašnjenja korisničkog interfejsa:
  
 \begin{enumerate}
 
-	\item \texttt{Tastatura}: Korisnik može koristiti tastaturu sa četiri reda i dva stubca za navigaciju i izbor opcija. Na tastaturi su raspoređeni tasteri od 1 do 8 koji imaju različite funkcije:
+	\item \texttt{Tastatura}: Korisnik može koristiti tastaturu sa četiri kolone i dva reda za navigaciju i izbor opcija. Na tastaturi su raspoređeni tasteri od 1 do 8 koji imaju različite funkcije:
 	\begin{itemize}
 		\item Tasteri od 1 do 4 služe za odabir različitih režima rada sistema, uključujući prebacivanje između prikaza temperature/vlažnosti i brzine ventilatora/stanja zvučnog alarma, kao i testiranje brzine ventilatora i zvučnog alarma.
         \item Tasteri 5 i 6 se koriste za uključivanje i isključivanje debug moda i podešavanje prilagođenih parametara za granice vlažnosti i temperature.
