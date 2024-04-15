@@ -204,12 +204,12 @@ U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom proj
 
 \vspace{10pt}
 
-Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće se ulaziti dataljnije u rad Arduono UNO R3 uređaja jer je to van okvira ovog projeta. 
+Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće se ulaziti dataljnije u rad Arduono UNO R3 (Slika \ref{ref:Arduino}) uređaja jer je to van okvira ovog projeta. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.17]{images/Arduino UNO R3}
-\caption{Arduino UNO R3} \label{Arduino UNO R3}
+\caption{Arduino UNO R3} \label{ref:Arduino}
 \end{figure}
 
 \pagebreak
@@ -219,12 +219,12 @@ Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće s
 
 \vspace{10pt}
 
-Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat je senzor temperature i vlažnosti vazduha DHT22. Ovo je glavni senzor u ovom projekt i bilo je od velike važnosti da se izabere relativno precizan i pouzdan senzor. Zato nije izabran možda i više zatupljen senzor DHT11 koji ima manju preciznost. Dimenzije senzora iznose 36x16x9mm (DxŠxV). DHT22 poseduje 3 pina: VCC (5V), DAT (D12) pin i GND. Osnovne karakteristike senzora su:
+Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat je senzor temperature i vlažnosti vazduha DHT22 (Slika \ref{ref:dht22pinssch}). Ovo je glavni senzor u ovom projekt i bilo je od velike važnosti da se izabere relativno precizan i pouzdan senzor. Zato nije izabran možda i više zatupljen senzor DHT11 koji ima manju preciznost. Dimenzije senzora iznose 36x16x9mm (DxŠxV). DHT22 poseduje 3 pina: VCC (5V), DAT (D12) pin i GND. Sve informacije su uzete iz DHT22 datasheet \ref{ref:DHT22-datasheet}. Osnovne karakteristike senzora su:
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{images/dht22pinssch}
-\caption{DHT22 senzor i njegov šematik} \label{dht22pinssch}
+\caption{DHT22 senzor i njegov šematik} \label{ref:dht22pinssch}
 \end{figure}
 
 \begin{itemize}
@@ -250,14 +250,15 @@ Struja & Prosečna & 0.5 & 0.8 & 1.1 & mA\\
 Period kolektovanja & Vreme & 1.7 &  & 2 & Sekunde\\
 \hline
 \end{tabular}
-\caption{Električne karakteristike DHT22} \label{tabela-2}
+\caption{Električne karakteristike DHT22} \label{ref:tabela-2}
 \end{table}
 
 Mane ovog senzora: 
 \begin{itemize}
-\item Brzina odgovora: DHT22 senzor može imati nešto sporiji odgovor u poređenju sa nekim drugim senzorima, što može biti problem u aplikacijama koje zahtevaju brze promene.
+\item Brzina odgovora: DHT22 senzor može imati nešto sporiji odgovor u poređenju sa nekim drugim senzorima, što može biti problem u aplikacijama koje zahtevaju brze promene. Što se može videti iz tabele \ref{ref:tabela-2}.
 \item Osetljivost na kondenzaciju: U uslovima visoke vlažnosti, DHT22 senzor može pokazivati greške zbog kondenzacije vode na površini senzora.
 \end{itemize}
+
 \pagebreak
 
 	\subsection{BLDC 5V ventilator}
@@ -266,7 +267,7 @@ Mane ovog senzora:
 	
 \begingroup
 	
-	Glavni aktuator ovog projekta je BLDC ventilator od 5V. Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
+	Glavni aktuator ovog projekta je BLDC ventilator od 5V (Slika \ref{ref:DC40mm5V}). Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
 	
 
 %Glavni aktuator ovog projekta je BLDC ventilator od 5V. Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
@@ -279,8 +280,8 @@ Mane ovog senzora:
 
 \begin{wrapfigure}{R}{0.5\textwidth}
 \centering
-\includegraphics[width=0.5\textwidth]{images/DC40mm5V} \label{DC40mm5V}
-\caption{Ventilator} 
+\includegraphics[width=0.5\textwidth]{images/DC40mm5V} 
+\caption{Ventilator} \label{ref:DC40mm5V}
 \end{wrapfigure}
 
 \vspace{10pt}
@@ -301,20 +302,20 @@ Jedina mana BLDC motora je složenost elektronske komutacije. Motoru je potrebna
 
 \vspace{10pt}
 
-Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan korišćenjem  PWM (Pulse Width Modulation) signala i sa jednim 2N2222A NPN tranzistorom. VCC motora je spojen na 5V a GND motora na kolektor tranzistora. Emiter tranzistora se spaja na GND, a baza na D10 pin Arduina sa kojeg se šalje kontrolni signal. Brzina motora je direktna posledica vrednosti fatkora ispune (odnosom trajanja visokog i niskog naponskog nivoa u toku jedne periode) koji se šalje iz Arduina. Za svaki 1°C povećanja merene vrednosi vrednost faktora ispune se povećava za 20\% sve dok ne dođe do 100\% kada ventilator na maxsimalnoj svojoj brzini. 
+Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan korišćenjem  PWM (Pulse Width Modulation) signala (Slika \ref{ref:pwm}) i sa jednim 2N2222A NPN tranzistorom. VCC motora je spojen na 5V a GND motora na kolektor tranzistora. Emiter tranzistora se spaja na GND, a baza na D10 pin Arduina sa kojeg se šalje kontrolni signal. Brzina motora je direktna posledica vrednosti fatkora ispune (odnosom trajanja visokog i niskog naponskog nivoa u toku jedne periode) koji se šalje iz Arduina. Za svaki 1°C povećanja merene vrednosi vrednost faktora ispune se povećava za 20\% sve dok ne dođe do 100\% kada ventilator na maxsimalnoj svojoj brzini. 
 
 \vspace{10pt}
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=0.7\textwidth]{images/pwm}\label{pwm}
-	\caption{Primer povećanja faktora ispune u PWM signalu}
+	\includegraphics[width=0.7\textwidth]{images/pwm}
+	\caption{Primer povećanja faktora ispune u PWM signalu} \label{ref:pwm}
 \end{figure}
 \pagebreak
 
 	\subsection{Piezo zujalica (MH-FMD)}
 	
-	Ovaj aktuator je dodat kako bi projekat imao još jedan dodatni način interakcije sa korisnikom. Princip rada piezoelektrične zujalice je zasnovan na dovođenju struje na piezo-električni disk koji je spojen sa tankom metalnom pločom. Piezo-električni disk osciluje zbog čega dolazi do savijanja metala napred-nazad. To savijanje metala prouzrokuje zvuk. Obično se koristi kao zvični alarm ili uzbuna. Frekvencija je ono što omogućava piezo zujalicu da proizvede zvuk. Evo nekih karakteristika piezo zujalica:
+	Ovaj aktuator (Slika \ref{ref:buzzer}) je dodat kako bi projekat imao još jedan dodatni način interakcije sa korisnikom. Princip rada piezoelektrične zujalice je zasnovan na dovođenju struje na piezo-električni disk koji je spojen sa tankom metalnom pločom. Piezo-električni disk osciluje zbog čega dolazi do savijanja metala napred-nazad. To savijanje metala prouzrokuje zvuk. Obično se koristi kao zvični alarm ili uzbuna. Frekvencija je ono što omogućava piezo zujalicu da proizvede zvuk. Evo nekih karakteristika piezo zujalica:
 \begin{itemize}
 	\item Što se brže metal savija, to je veći nivo buke koja se proizvodi.
 	\item Ova stopa se zove frekvencija.
@@ -331,7 +332,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.2]{images/buzzer}
-\caption{Piezo-električna zujalica} \label{buzzer}
+\caption{Piezo-električna zujalica} \label{ref:buzzer}
 \end{figure}
 
 \vspace{10pt}
@@ -340,12 +341,12 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{LCD I2C 16x2}
 	
-	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
+	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul (Slika \ref{ref:I2CLCD}) koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
 	
 	\begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{images/I2CLCD}
-\caption{LCD 16x2 sa I2C modulon} \label{I2CLCD}
+\caption{LCD 16x2 sa I2C modulon} \label{ref:I2CLCD}
 \end{figure}
 	
 
@@ -357,11 +358,11 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 \pagebreak
 
 
-	\subsection*{Šema kola projekta}
+	\subsection*{Šema kola projekta} \label{ref:circuit_diagram}
 	
 \begin{figure}[H]
 \centering
-\rotatebox{270}{\includegraphics[scale=0.5]{images/circuit_diagram}} \label{circuit_diagram}
+\rotatebox{270}{\includegraphics[scale=0.5]{images/circuit_diagram}} 
 \end{figure}
 
 \vspace{10pt}
