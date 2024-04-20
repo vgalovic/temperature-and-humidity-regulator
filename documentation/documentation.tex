@@ -10,7 +10,7 @@
 \usepackage{graphicx, wrapfig, float, enumitem, hyperref, chngcntr, ragged2e}
 
 \usepackage{listings}          % for creating language style
-\input{arduinoLanguage.tex}    % adds the arduino language listing
+%\input{arduinoLanguage.tex}    % adds the arduino language listing
 
 \counterwithout{enumi}{section}
 
@@ -340,7 +340,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{LCD I2C 16x2}
 	
-	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
+	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul  koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
 	
 	\begin{figure}[H]
 \centering
