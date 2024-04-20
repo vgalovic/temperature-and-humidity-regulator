@@ -9,12 +9,6 @@
 \usepackage{amsfonts, amssymb, amsmath}
 \usepackage{graphicx, wrapfig, float, enumitem, hyperref, chngcntr, ragged2e, pgfplots}
 
-\usepackage{listings}          % for creating language style
-<<<<<<< HEAD
-%\input{arduinoLanguage.tex}    % adds the arduino language listing
-=======
->>>>>>> refs/remotes/origin/main
-
 \counterwithout{enumi}{section}
 
 \title{Projekat iz primene senzora i aktulatora}
@@ -329,11 +323,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{LCD I2C 16x2}
 	
-<<<<<<< HEAD
-	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul  koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
-=======
 	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul (Slika \ref{ref:I2CLCD}) koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
->>>>>>> refs/remotes/origin/main
 	
 	\begin{figure}[H]
 \centering
@@ -586,26 +576,29 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 \centering
 \begin{axis}[width=\linewidth, height=12cm,
 	title={Testiranje merenja vlage senzora DHT22},
-	xlabel={Humidity [\%]},    
-    ylabel={Time [s]},
+    xlabel={Time [s]},
+	ylabel={Humidity [\%]},        
     label style={font=\small},
-    xmax=100,
-    ymin=0, ymax=180,
+	xmin=0, xmax=40,    
+    ymax=100,
     legend pos=north west,
     ymajorgrids=true,
     grid style=dashed]
      
 \addlegendentry{Voda: 25.0 °C}
-\addplot[no marks, color=blue] table[x=Humidity, y=Time]{tests/humidity/test1.txt};
+\addplot[no marks, color=blue] table[x=Time, y=Humidity]{tests/humidity/test1.txt};
+
+\addlegendentry{Voda: 30.0 °C}
+\addplot[no marks, color=green] table[x=Time, y=Humidity]{tests/humidity/test2.txt};
 
 \addlegendentry{Voda: 35.0 °C}
-\addplot[no marks,  color=red] table[x=Humidity, y=Time]{tests/humidity/test2.txt};
+\addplot[no marks,  color=yellow] table[x=Time, y=Humidity]{tests/humidity/test3.txt};
 
 \addlegendentry{Voda: 45.0 °C}
-\addplot[no marks,  color=green] table[x=Humidity, y=Time]{tests/humidity/test3.txt};
+\addplot[no marks,  color=orange] table[x=Time, y=Humidity]{tests/humidity/test4.txt};
 
 \addlegendentry{Voda: 55.0 °C}
-\addplot[no marks,  color=purple] table[x=Humidity, y=Time]{tests/humidity/test4.txt};
+\addplot[no marks,  color=red] table[x=Time, y=Humidity]{tests/humidity/test5.txt};
 
 \end{axis}
 \end{tikzpicture}
@@ -624,13 +617,16 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
     ylabel={Temperature [°C]},
     label style={font=\small},
     xmin=0, xmax=650,
-	ymax=100,
+	ymax=200,
     legend pos=north west,
     ymajorgrids=true,
     grid style=dashed]
      
 \addlegendentry{DHT22}
 \addplot[no marks, color=blue] table[x=Time, y=Temperature]{tests/temperature/test1.txt};
+
+\addlegendentry{Kuhinjski termometar(TP300)}
+\addplot[no marks, color=red] table[x=Time, y=Temperature]{tests/temperature/test2.txt};
 
 \end{axis}
 \end{tikzpicture}
