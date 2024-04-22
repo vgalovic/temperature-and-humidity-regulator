@@ -6,8 +6,17 @@
 \usepackage[english, serbian]{babel}
 \usepackage[none]{hyphenat}
 
-\usepackage{amsfonts, amssymb, amsmath}
-\usepackage{graphicx, wrapfig, float, enumitem, hyperref, chngcntr, ragged2e, pgfplots}
+\usepackage{amsfonts, amssymb, amsmath, amstext}
+\usepackage{graphicx, wrapfig, enumitem, hyperref, chngcntr, ragged2e, pgfplots, lmodern, cleveref}
+
+\usepackage{caption, float}
+
+\pgfplotsset{compat=1.14}
+\floatstyle{plaintop}
+\newfloat{grafik}{tbph}{loc}
+\floatname{grafik}{Grafik}
+\crefname{grafik}{grafik}{grafici}
+\Crefname{grafik}{Grafik}{Grafici}
 
 \counterwithout{enumi}{section}
 
@@ -99,7 +108,7 @@ Regulacija temperature i vlažnosti vazduha
 
 \vspace{10pt}
 
-Ova tema je izabrana zbog interesovanja za rad sa DHT22 senzorom dok su sve ostale funkcionalnosti dodate tokom realizacije projekta. Sa ovim snezorom kao prvom tačkom projekta izabran je problem čitanja i regulisanja temperature i vlažnosti vazduha neke zatvorene sredine poput nekog skadišta gde je održavanje temperature i vlažnosti bitno. Primer za ovakav uređaj je humidor za cigare koji održva konstantnu temperaturu (16-22 °C) i vlažnost (60-75 \%) kako bi održao kvalitet cigare (Slika \ref{primer}).
+Ova tema je izabrana zbog interesovanja za rad sa DHT22 senzorom dok su sve ostale funkcionalnosti dodate tokom realizacije projekta. Sa ovim snezorom kao prvom tačkom projekta izabran je problem čitanja i regulisanja temperature i vlažnosti vazduha neke zatvorene sredine poput nekog skadišta gde je održavanje temperature i vlažnosti bitno. Primer za ovakav uređaj je humidor za cigare koji održva konstantnu temperaturu (16-22 °C) i vlažnost (60-75 \%) kako bi održao kvalitet cigare (Slika \ref{fig:primer}).
 
 \vspace{10pt}
 
@@ -116,7 +125,7 @@ Realizacija i upoznavanje sa svim karakteristikama komopnenti je započeta povez
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.13]{images/primer}
-\caption{humidor za cigare} \label{primer}
+\caption{humidor za cigare} \label{fig:primer}
 \end{figure}
 
 \pagebreak
@@ -135,7 +144,7 @@ Za povećanje temperature se koriste grejači, a za povećnje vlažnosti vazduha
 
 \vspace{10pt}
 
-Zarad pojednostavljivanja i lakše realizacije fokus se stavlja samo na proces smanjivanja temperature i vlažnosti vazduha. Za ovaj proces je samo potreban jedan aktuator. Koji je u primeru ovog projekta BLDC motor sa ventilatorom. Dok bi u procesu povećanja temperature i vlažnosti vazduha morali da imam bar dva aktuatora. Grejač i neki sistem vodenih pumpi koji bi distribuitao vodu u odgarajućoj meri. Čime bi se obim i kompleksnost ovog projekta znatno povećao. Ovim pojednostaviljanjem dolazi i do promena merenih vrenosti jer bez dodatnih komponenti naša sredina neće održavati temperaturu i vlažnost kao Hunidor nego kao srednju vrednost prostorije. U tabeli \ref{tabela-1} može se videti razlika između promena mernih vrednost Humidora i ovog projekta.
+Zarad pojednostavljivanja i lakše realizacije fokus se stavlja samo na proces smanjivanja temperature i vlažnosti vazduha. Za ovaj proces je samo potreban jedan aktuator. Koji je u primeru ovog projekta BLDC motor sa ventilatorom. Dok bi u procesu povećanja temperature i vlažnosti vazduha morali da imam bar dva aktuatora. Grejač i neki sistem vodenih pumpi koji bi distribuitao vodu u odgarajućoj meri. Čime bi se obim i kompleksnost ovog projekta znatno povećao. Ovim pojednostaviljanjem dolazi i do promena merenih vrenosti jer bez dodatnih komponenti naša sredina neće održavati temperaturu i vlažnost kao Hunidor nego kao srednju vrednost prostorije. U tabeli \ref{tab:merne-vrednosti} može se videti razlika između promena mernih vrednost Humidora i ovog projekta.
 
 \vspace{10pt}
 
@@ -150,7 +159,7 @@ Humidor & 60 - 75 \% & 16 - 22 °C\\
 Srednja vrednost prostorije & 30 - 80 \% & 26 - 30 °C\\
 \hline
 \end{tabular}
-\caption{Promea merenih vrednosti} \label{tabela-1}
+\caption{Promea merenih vrednosti} \label{tab:merne-vrednosti}
 \end{table}
 
 Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulacija temperature i vlažnosti vazduha, iako u suženom obliku. Dok sve ostale komponente doprinose boljoj interakciji korisnika sa uređajom. Regulacija je glavni cilj, dok je interfejs sporedni.
@@ -186,12 +195,12 @@ U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom proj
 
 \vspace{10pt}
 
-Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće se ulaziti dataljnije u rad Arduono UNO R3 (Slika \ref{ref:Arduino}) uređaja jer je to van okvira ovog projeta. 
+Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće se ulaziti dataljnije u rad Arduono UNO R3 (Slika \ref{fig:Arduino}) uređaja jer je to van okvira ovog projeta. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.17]{images/Arduino UNO R3}
-\caption{Arduino UNO R3} \label{ref:Arduino}
+\caption{Arduino UNO R3} \label{fig:Arduino}
 \end{figure}
 
 \pagebreak
@@ -201,12 +210,12 @@ Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće s
 
 \vspace{10pt}
 
-Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat je senzor temperature i vlažnosti vazduha DHT22 (Slika \ref{ref:dht22pinssch}). Ovo je glavni senzor u ovom projekt i bilo je od velike važnosti da se izabere relativno precizan i pouzdan senzor. Zato nije izabran možda i više zatupljen senzor DHT11 koji ima manju preciznost. Dimenzije senzora iznose 36x16x9mm (DxŠxV). DHT22 poseduje 3 pina: VCC (5V), DAT (D12) pin i GND. Sve informacije su uzete iz DHT22 datasheet \ref{ref:DHT22-datasheet}. Osnovne karakteristike senzora su:
+Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat je senzor temperature i vlažnosti vazduha DHT22 (Slika \ref{fig:dht22pinssch}). Ovo je glavni senzor u ovom projekt i bilo je od velike važnosti da se izabere relativno precizan i pouzdan senzor. Zato nije izabran možda i više zatupljen senzor DHT11 koji ima manju preciznost. Dimenzije senzora iznose 36x16x9mm (DxŠxV). DHT22 poseduje 3 pina: VCC (5V), DAT (D12) pin i GND. Sve informacije su uzete iz DHT22 datasheet \ref{lib:DHT22-datasheet}. Osnovne karakteristike senzora su:
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{images/dht22pinssch}
-\caption{DHT22 senzor i njegov šematik} \label{ref:dht22pinssch}
+\caption{DHT22 senzor i njegov šematik} \label{fig:dht22pinssch}
 \end{figure}
 
 \begin{itemize}
@@ -232,12 +241,12 @@ Struja & Prosečna & 0.5 & 0.8 & 1.1 & mA\\
 Period kolektovanja & Vreme & 1.7 &  & 2 & Sekunde\\
 \hline
 \end{tabular}
-\caption{Električne karakteristike DHT22} \label{ref:tabela-2}
+\caption{Električne karakteristike DHT22} \label{tab:DHT22}
 \end{table}
 
 Mane ovog senzora: 
 \begin{itemize}
-\item Brzina odgovora: DHT22 senzor može imati nešto sporiji odgovor u poređenju sa nekim drugim senzorima, što može biti problem u aplikacijama koje zahtevaju brze promene. Što se može videti iz tabele \ref{ref:tabela-2}.
+\item Brzina odgovora: DHT22 senzor može imati nešto sporiji odgovor u poređenju sa nekim drugim senzorima, što može biti problem u aplikacijama koje zahtevaju brze promene. Što se može videti iz tabele \ref{tab:DHT22}.
 \item Osetljivost na kondenzaciju: U uslovima visoke vlažnosti, DHT22 senzor može pokazivati greške zbog kondenzacije vode na površini senzora.
 \end{itemize}
 
@@ -249,7 +258,7 @@ Mane ovog senzora:
 	
 \begingroup
 	
-	Glavni aktuator ovog projekta je BLDC ventilator od 5V (Slika \ref{ref:DC40mm5V}). Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
+	Glavni aktuator ovog projekta je BLDC ventilator od 5V (Slika \ref{fig:DC40mm5V}). Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
 	
 
 %Glavni aktuator ovog projekta je BLDC ventilator od 5V. Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
@@ -263,7 +272,7 @@ Mane ovog senzora:
 \begin{wrapfigure}{R}{0.5\textwidth}
 \centering
 \includegraphics[width=0.5\textwidth]{images/DC40mm5V} 
-\caption{Ventilator} \label{ref:DC40mm5V}
+\caption{Ventilator} \label{fig:DC40mm5V}
 \end{wrapfigure}
 
 \vspace{10pt}
@@ -284,20 +293,20 @@ Jedina mana BLDC motora je složenost elektronske komutacije. Motoru je potrebna
 
 \vspace{10pt}
 
-Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan korišćenjem  PWM (Pulse Width Modulation) signala (Slika \ref{ref:pwm}) i sa jednim 2N2222A NPN tranzistorom. VCC motora je spojen na 5V a GND motora na kolektor tranzistora. Emiter tranzistora se spaja na GND, a baza na D10 pin Arduina sa kojeg se šalje kontrolni signal. Brzina motora je direktna posledica vrednosti fatkora ispune (odnosom trajanja visokog i niskog naponskog nivoa u toku jedne periode) koji se šalje iz Arduina. Za svaki 1°C povećanja merene vrednosi vrednost faktora ispune se povećava za 20\% sve dok ne dođe do 100\% kada ventilator na maxsimalnoj svojoj brzini. 
+Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan korišćenjem  PWM (Pulse Width Modulation) signala (Slika \ref{fig:pwm}) i sa jednim 2N2222A NPN tranzistorom. VCC motora je spojen na 5V a GND motora na kolektor tranzistora. Emiter tranzistora se spaja na GND, a baza na D10 pin Arduina sa kojeg se šalje kontrolni signal. Brzina motora je direktna posledica vrednosti fatkora ispune (odnosom trajanja visokog i niskog naponskog nivoa u toku jedne periode) koji se šalje iz Arduina. Za svaki 1°C povećanja merene vrednosi vrednost faktora ispune se povećava za 20\% sve dok ne dođe do 100\% kada ventilator na maxsimalnoj svojoj brzini. 
 
 \vspace{10pt}
 
 \begin{figure}[H]
 \centering
 	\includegraphics[width=0.7\textwidth]{images/pwm}
-	\caption{Primer povećanja faktora ispune u PWM signalu} \label{ref:pwm}
+	\caption{Primer povećanja faktora ispune u PWM signalu} \label{fig:pwm}
 \end{figure}
 \pagebreak
 
 	\subsection{Piezo zujalica (MH-FMD)}
 	
-	Ovaj aktuator (Slika \ref{ref:buzzer}) je dodat kako bi projekat imao još jedan dodatni način interakcije sa korisnikom. Princip rada piezoelektrične zujalice je zasnovan na dovođenju struje na piezo-električni disk koji je spojen sa tankom metalnom pločom. Piezo-električni disk osciluje zbog čega dolazi do savijanja metala napred-nazad. To savijanje metala prouzrokuje zvuk. Obično se koristi kao zvični alarm ili uzbuna. Frekvencija je ono što omogućava piezo zujalicu da proizvede zvuk. Evo nekih karakteristika piezo zujalica:
+	Ovaj aktuator (Slika \ref{fig:buzzer}) je dodat kako bi projekat imao još jedan dodatni način interakcije sa korisnikom. Princip rada piezoelektrične zujalice je zasnovan na dovođenju struje na piezo-električni disk koji je spojen sa tankom metalnom pločom. Piezo-električni disk osciluje zbog čega dolazi do savijanja metala napred-nazad. To savijanje metala prouzrokuje zvuk. Obično se koristi kao zvični alarm ili uzbuna. Frekvencija je ono što omogućava piezo zujalicu da proizvede zvuk. Evo nekih karakteristika piezo zujalica:
 \begin{itemize}
 	\item Što se brže metal savija, to je veći nivo buke koja se proizvodi.
 	\item Ova stopa se zove frekvencija.
@@ -314,7 +323,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.2]{images/buzzer}
-\caption{Piezo-električna zujalica} \label{ref:buzzer}
+\caption{Piezo-električna zujalica} \label{fig:buzzer}
 \end{figure}
 
 \vspace{10pt}
@@ -323,12 +332,12 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{LCD I2C 16x2}
 	
-	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul (Slika \ref{ref:I2CLCD}) koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
+	Kao osnovni način prikazivanja merenih vrednosti izabran je LCD 16x2. Pošto se broj slobodnih pinova smanjivao kako su se dodavali novi elementi u projekat, broj od 16 pinova potreban za povetivanje LDC displeja je postao problem. Rešenje ovog problema je bilo spajanje na I2C modul (Slika \ref{fig:I2CLCD}) koji drastično smanjuje broj potrebnih pinova sa 16 na 4. I2C (Inter-Integrated Circuit) je serijski protokol komunikacije koji omogućava digitalnim uređajima da razmenjuju podatke i komande putem dva voda - Serial Data (SDA) i Serial Clock (SCL). Pinovi ovog modula su GND, VCC (5V), SDA i SCL. Arduiono UNO R3 već poseduje SDA i SCL pinove baš za ovu upotrebu, ali se mogu koristiti i ostali analogni pinovi kao npr. pin A4 i A5. Dimenzije LCD-a sa I2C modulom iznose 80x36x19.25mm
 	
 	\begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{images/I2CLCD}
-\caption{LCD 16x2 sa I2C modulon} \label{ref:I2CLCD}
+\caption{LCD 16x2 sa I2C modulon} \label{fig:I2CLCD}
 \end{figure}
 	
 
@@ -339,12 +348,12 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 	
 \pagebreak
 
-
-	\subsection*{Šema kola projekta} \label{ref:circuit_diagram}
+	\subsection*{Šema kola projekta}
 	
 \begin{figure}[H]
 \centering
 \rotatebox{270}{\includegraphics[scale=0.5]{images/circuit_diagram}} 
+\label{fig:circuit_diagram}
 \end{figure}
 
 \vspace{10pt}
@@ -560,22 +569,43 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 \pagebreak
 \endgroup
 
+\begingroup
+\justifying
 \section{Rezultati testiranja}
 
 \vspace{10pt}
 
 	\subsection{Testiranja}
+	
+\vspace{10pt}
 
+Za testiranje senzora su izabrane metode koje bi bile lake za ponovnu reprodukciju u kućnim uslovima. Pretpostavljeno je da radi testiranja krejnjih vrtednosti temperature i vlažnosti vazduha DHT22 senzora treba obaviti odvojena testiranje tih vrednosti. 
+
+		\subsubsection*{Testiranje merenja vlage senzora DHT22}
+
+\vspace{10pt}	
+		
+Testiranje vlage zatvorene stredine je sprovedeno lepljenjem DHT22 za unutrašnju stranu poklopca plastične kutije. Na dno plastične kutije zapremine 1650ml je sipano 250ml vode na različitim temperaturama. Počevši od sobne temperature od 25°C pa sve do 55°C. Poklopcem sa senzorom zatvaramo kutiju i merimo vrednosti relativne vlažnosti vazduha (Slika \ref{fig:test_vlaga}).
 
 \vspace{10pt}
 
-		\subsubsection*{Testiranje merenja vlage senzora DHT22}
-		
+\begin{figure}[H]
+\centering
+\rotatebox{270}{\includegraphics[scale=0.09]{images/test_vlaga}}
+\caption{Slika testiranja merenja vlage senzora DHT22} \label{fig:test_vlaga}
+\end{figure}
+
+\pagebreak
+
+Primećeno je da su mala povećanja temperature vode imala veliki uticaj na brzinu povećanja merene vlage vazduha (Grafik \ref{grafik:humi}). Na temperaturi vode od 55°C izmerena vlaga je dostigla svoj maksimum za 22 sekunde, dok se temperatura vazduha promenila za svega 2-3°C čime je potvrđena prethodna pretpostavka za odvojeno merenje vrednosti senzora. Na većim temperaturama (45°C i 55°C) merenje je i prekinuto zbog opreznosti da kondenzacija vode u kućištu senzora ne napravi grešku i zbog već brzog dolaska do 100\% relativne vlažnosti vazduha.
+
+\vspace{10pt}
+
+\begin{grafik}	
 \begin{center}
 \begin{tikzpicture}
 \centering
 \begin{axis}[width=\linewidth, height=12cm,
-	title={Testiranje merenja vlage senzora DHT22},
     xlabel={Time [s]},
 	ylabel={Humidity [\%]},        
     label style={font=\small},
@@ -603,16 +633,34 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 \end{axis}
 \end{tikzpicture}
 \end{center}	
+\caption{Testiranja merenja vlage senzora DHT22} \label{grafik:humi}
+\end{grafik}
 
 \pagebreak
 
 		\subsubsection*{Testiranje merenja temperature senzora DHT22}
 		
+Testiranje temperature nije izvršeno u zatvorenoj sredini zbog izbora kuhinjskog rešoa za grejno telo. Pretpostavljeno je da bi veličina i jačina ovog grejnog tela prebrzo zagreja bilo koji materijal poput prethodno korišćene plastične kutije.Senzor je hvataljkom postavljen na visinu od 60mm iznad centra rešoa (Slika \ref{fig:test_temp}), a referentna temperatura samog rešoa merena je kuhinjskim termometrom TP-300 \ref{lib:TP300}.
+
+\vspace{10pt}
+
+\begin{figure}[H]
+\centering
+\rotatebox{90}{\includegraphics[scale=0.09]{images/test_temp}}
+\caption{Slika testiranja merenja temperature senzora DHT22} \label{fig:test_temp}
+\end{figure}
+
+\pagebreak
+
+Iz testiranja je primećeno da za široku promenu merene temperature na senzoru potrebne su velike temperature grejnog tela (rešoa). Inegracija grejnog tela u sam projekat bi kompromitovala mnoge plastične komponente korišćene u projektu uzeći u obzir da je temperatura na kojoj se PVC plastika deformiše je 40-80°C. Krajnja vrednosti koju je senzor, koji poseduje plastično kućište, izmerio je bila 65°C dok je vrednost grejnog tela bila 184°C (Grafik \ref{grafiik:temp}). Time je potvrđena pretpostavka u Uvodu da se izbacivanjem grejnih elemenata projekat drastično pojednastavljuje. 
+
+\vspace{10pt}
+
+\begin{grafik}
 \begin{center}
 \begin{tikzpicture}
 \centering
 \begin{axis}[width=\linewidth, height=8cm,
-	title={Testiranje merenja temperature senzora DHT22},
 	xlabel={Time [s]},    
     ylabel={Temperature [°C]},
     label style={font=\small},
@@ -631,8 +679,8 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 \end{axis}
 \end{tikzpicture}
 \end{center}			
-
-
+\caption{Testiranja merenja temperature senzora DHT22}\label{grafiik:temp}
+\end{grafik}
 %Nakon što je uređaj izrađen može se pristupiti njegovom testiranju. Testiranje podrazumeva proveru performansi u praksi.
 %
 %\vspace{10pt}
@@ -643,6 +691,7 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 %
 %Treba proveriti i u ovom odeljku opisati koliko uređaj uspešno obavlja zadatak za koji je projektovan. To treba potkrepiti merenjima ulaznih test signala, izlaznih signala i unutrašnjih signala koji predstavljaju nekakav međurezultat. Mogu se dati tabele sa rezultatima, frekvencijske karakteristike, slike dobijene pomoću oscilokopa i slično ukoliko to može da koristi u predočavanju performansi.
 \pagebreak
+\endgroup
 
 \begingroup
 \justifying
@@ -690,8 +739,8 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 %
 %
 \begin{enumerate}[label={[\arabic*]}, leftmargin=2.5cm]
-	\item Datasheet od DHT22: \label{ref:DHT22-datasheet}\\ \url{https://cdn-shop.adafruit.com/datasheets/DHT22.pdf}	
-	\item Manual za Teromometar TP300: \label{ref:TP300}\\ \url{https://dpstar.com.my/wp-content/uploads/2020/04/ecostar-TP-300-Series-Need-Probe-Digital-Thermometer\%E2\%80\%93Dpstargroup.pdf}	
+	\item Datasheet od DHT22: \label{lib:DHT22-datasheet}\\ \url{https://cdn-shop.adafruit.com/datasheets/DHT22.pdf}	
+	\item Manual za Teromometar TP300: \label{lib:TP300}\\ \url{https://dpstar.com.my/wp-content/uploads/2020/04/ecostar-TP-300-Series-Need-Probe-Digital-Thermometer\%E2\%80\%93Dpstargroup.pdf}	
 %	\item Ime Prezime Autora, Kuvar elektronike, FTN, Novi Sad, 2008.
 %	\item T. K. Webber, Infrared Sensors, MCMillan, 2002.
 \end{enumerate}
