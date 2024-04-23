@@ -171,13 +171,6 @@ Srednja vrednost prostorije & 30 - 80 \% & 26 - 30 °C\\
 
 Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulacija temperature i vlažnosti vazduha, iako u suženom obliku. Dok sve ostale komponente doprinose boljoj interakciji korisnika sa uređajom. Regulacija je glavni cilj, dok je interfejs sporedni.
 
-%Veoma važan deo projektnog rada. Naslov se po potrebi može promeniti, ali suština teksta mora da ostane analiza problema.
-%
-%Treba jasno istaći šta su glavni (i sporedni) ciljevi koji žele da se postignu razvojem novog uređaja. Treba navesti postojeća rešenja ukoliko postoje i mogu da se pronađu informacije o njima. Ova analiza i u praksi treba da se sprovede (ne samo u cilju navođenja u ovom tekstu) da bi se jasno zacrtao put razvoja uređaja i da bi se donele ključne odluke na osnovu kojih se neka potencijalna rešenja odbacuju, a druga prihvataju.
-%
-%Ovakva analiza je jedan od ključnih elemenata inženjerskog razmišljanja i samim tim i jedan od ključnih ciljeva ovog projekta. Zbog toga je veoma važno da se u ovom odeljku navedu sva rešenja koja su razmatrana i da se obrazloži zašto je neko od njih usvojeno kao dobro, a neko drugo odbačeno kao neodgovarajuće za ovaj projekat.
-%\vspace{10pt}
-
 \pagebreak
 \endgroup
 
@@ -270,9 +263,7 @@ Mane ovog senzora:
 \begingroup
 	
 	Glavni aktuator ovog projekta je BLDC ventilator od 5V (Slika \ref{fig:DC40mm5V}). Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
-	
 
-%Glavni aktuator ovog projekta je BLDC ventilator od 5V. Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
 \begin{itemize}
 	\item Radni napon: 5V
 	\item Snaga: 3.6W
@@ -586,11 +577,21 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 
 \begingroup
 \justifying
-\section{Rezultati testiranja}
+\section{Rezultati proračuna i testiranja}
 
 \vspace{10pt}
 
-	\subsection{Testiranja}
+
+	\subsection{Proračuni BLDC motora }
+	
+
+\vspace{10pt}
+
+
+
+\pagebreak
+
+	\subsection{Testiranja senzora DHT22}
 	
 \vspace{10pt}
 
