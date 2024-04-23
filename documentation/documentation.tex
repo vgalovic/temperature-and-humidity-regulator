@@ -1,5 +1,5 @@
 \documentclass[a4paper, 12pt]{article}
-\usepackage[margin = 2.5cm]{geometry}
+\usepackage[lmargin=2.5cm, rmargin=2.5cm, tmargin=2cm, bmargin=2.5cm]{geometry}
 
 \usepackage[utf8]{inputenc}
 \usepackage[OT2, T1]{fontenc}
@@ -28,11 +28,16 @@
 
 \begin{titlepage}
 
+\begin{figure}
+\centering
+\vspace*{-2cm}
+\includegraphics[scale=0.56]{images/ftn_logo}
+\label{fig:ftn_logo}
+\end{figure}
+
+\vspace*{2cm}
+
 \begin{center}
-\includegraphics[scale=0.5]{images/ftn_logo}
-
-\vspace{3cm}
-
 \begin{Large}
 \textbf{PROJEKAT IZ PRIMENE SENZORA I AKTUATORA}
 \end{Large}
@@ -108,6 +113,7 @@ Regulacija temperature i vlažnosti vazduha
 
 \vspace{10pt}
 
+\sloppypar
 Ova tema je izabrana zbog interesovanja za rad sa DHT22 senzorom dok su sve ostale funkcionalnosti dodate tokom realizacije projekta. Sa ovim snezorom kao prvom tačkom projekta izabran je problem čitanja i regulisanja temperature i vlažnosti vazduha neke zatvorene sredine poput nekog skadišta gde je održavanje temperature i vlažnosti bitno. Primer za ovakav uređaj je humidor za cigare koji održva konstantnu temperaturu (16-22 °C) i vlažnost (60-75 \%) kako bi održao kvalitet cigare (Slika \ref{fig:primer}).
 
 \vspace{10pt}
@@ -144,6 +150,7 @@ Za povećanje temperature se koriste grejači, a za povećnje vlažnosti vazduha
 
 \vspace{10pt}
 
+\sloppypar
 Zarad pojednostavljivanja i lakše realizacije fokus se stavlja samo na proces smanjivanja temperature i vlažnosti vazduha. Za ovaj proces je samo potreban jedan aktuator. Koji je u primeru ovog projekta BLDC motor sa ventilatorom. Dok bi u procesu povećanja temperature i vlažnosti vazduha morali da imam bar dva aktuatora. Grejač i neki sistem vodenih pumpi koji bi distribuitao vodu u odgarajućoj meri. Čime bi se obim i kompleksnost ovog projekta znatno povećao. Ovim pojednostaviljanjem dolazi i do promena merenih vrenosti jer bez dodatnih komponenti naša sredina neće održavati temperaturu i vlažnost kao Hunidor nego kao srednju vrednost prostorije. U tabeli \ref{tab:merne-vrednosti} može se videti razlika između promena mernih vrednost Humidora i ovog projekta.
 
 \vspace{10pt}
@@ -175,6 +182,7 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulacija temperature i
 \endgroup
 
 \begingroup
+\justifying
 \section{Hardverska realizacija projekta}
 
 \vspace{10pt}
@@ -185,6 +193,7 @@ U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom proj
 	
 		\item Jednostavnost korišćenja: Arduino je dizajniran da bude jednostavan za upotrebu, čak i za početnike u elektronici i programiranju. Dolazi sa jednostavnom integrisanom razvojnom okolinom (IDE) koja omogućava brzo pisanje, kompajliranje i uploadovanje koda na Arduino mikrokontroler.
 		\item Mala veličina: Arduino je veoma kompaktna platforma, što je čini idealnim za ugradnju u razne uređaje i projekte.
+		\sloppypar
         \item Niska cena: Arduino pločice su veoma pristupačan, što ga čini odličnim izborom za hobiste, učenike i sve one koji žele da istražuju tehnologiju bez velikih finansijskih ulaganja.
         \item Širok spektar modela: Postoje različiti modeli Arduino pločica, od osnovnih do naprednih, sa različitim brojem ulazno/izlaznih pinova, radnim naponima i drugim karakteristikama. To omogućava korisnicima da odaberu pločicu koja najbolje odgovara njihovom projektu. Za ovaj projekat izabran je Arduino UNO R3 model.
         \item Mogućnost proširenja: Arduino pločice imaju mogućnost proširenja putem širokog spektra dodatnih modula, senzora, aktuatora i drugih komponenti koji se lako povezuju putem standardizovanih interfejsa kao što su digitalni i analogni pinovi, I2C, SPI, UART itd.
@@ -195,6 +204,7 @@ U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom proj
 
 \vspace{10pt}
 
+\sloppypar
 Pored ovoliko prednosti bilo je lako odlučiti se za Arduino okruženje. Neće se ulaziti dataljnije u rad Arduono UNO R3 (Slika \ref{fig:Arduino}) uređaja jer je to van okvira ovog projeta. 
 
 \begin{figure}[H]
@@ -221,6 +231,7 @@ Kao što je pomenuto u uvodnom delu komponenta koja je inspirisala ovaj projekat
 \begin{itemize}
 	\item Merenje temperature: DHT22 senzor omogućava precizno merenje temperature u opsegu od -40°C do +80°C sa tačnošću od ±0.5°C.
 	\item Merenje vlage: Osim temperature, DHT22 senzor takođe meri relativnu vlažnost vazduha u opsegu od 0\% do 100\% sa tačnošću od ±2\%.
+	\sloppypar
 	\item Digitalni izlaz (8-bit): DHT22 senzor koristi digitalni interfejs za komunikaciju sa mikrokontrolerom, što olakšava integraciju u različite projekte.
 	\item Jednostavno korišćenje: DHT22 senzor se lako povezuje sa mikrokontrolerima kao što su Arduino ili Raspberry Pi putem samo tri žice (napajanje, zemlja i digitalni signal).
 	\item Pouzdanost: DHT22 senzor je relativno pouzdan i precizan u merenju temperature i vlage, što ga čini popularnim izborom za mnoge aplikacije.
@@ -374,6 +385,7 @@ U ovom poglavlju se govori u kratkim crtama o kodu koji pokreće hardver projekt
 
 	\item \texttt{Tastatura}: Korisnik može koristiti tastaturu sa četiri kolone i dva reda za navigaciju i izbor opcija. Na tastaturi su raspoređeni tasteri od 1 do 8 koji imaju različite funkcije:
 	\begin{itemize}
+		\sloppypar
 		\item Tasteri od 1 do 4 služe za odabir različitih režima rada sistema, uključujući prebacivanje između prikaza temperature/vlažnosti i brzine ventilatora/stanja zvučnog alarma, kao i testiranje brzine ventilatora i zvučnog alarma.
         \item Tasteri 5 i 6 se koriste za uključivanje i isključivanje debug moda i podešavanje prilagođenih parametara za granice vlažnosti i temperature.
         \item Taster 8 se koristi za čišćenje LCD ekrana.
@@ -450,6 +462,7 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 	
 	\item \textbf{Podrazumevane Vrednosti}:
 	\begin{itemize}
+		\sloppypar
     		\item \texttt{DEFAULT\_HUMIDITY\_MIN}, \texttt{DEFAULT\_HUMIDITY\_MAX},\\ \texttt{DEFAULT\_TEMPERATURE\_MIN}:
     		\\ Podrazumevane minimalne i maksimalne granice vlažnosti i podrazumevana minimalna granica temperature.
 	\end{itemize}
@@ -503,6 +516,7 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
     \item \textbf{humidity\_min}, \textbf{humidity\_max}, \textbf{temperature\_min}:
         \begin{itemize}
             \item \textbf{Tip}: Broj (Unsigned 8-bit integer)
+            \sloppypar
             \item \textbf{Opis}: Definiše minimalne i maksimalne pragove vlažnosti (\textbf{humidity\_min}, \textbf{humidity\_max}) i minimalni prag temperature (\textbf{temperature\_min}) za sistem.
         \end{itemize}
         
@@ -556,7 +570,8 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
         \end{enumerate}
         
     \item \textbf{setup()}:
-        \begin{enumerate}[label={},leftmargin=*] 
+        \begin{enumerate}[label={},leftmargin=*]
+        		\sloppypar
             \item Inicijalizuje sistem, uključujući postavljanje pinova, LCD ekrana i inicijalizaciju parametara.
         \end{enumerate}
         
@@ -597,6 +612,7 @@ Testiranje vlage zatvorene stredine je sprovedeno lepljenjem DHT22 za unutrašnj
 
 \pagebreak
 
+\sloppypar
 Primećeno je da su mala povećanja temperature vode imala veliki uticaj na brzinu povećanja merene vlage vazduha (Grafik \ref{grafik:humi}). Na temperaturi vode od 55°C izmerena vlaga je dostigla svoj maksimum za 22 sekunde, dok se temperatura vazduha promenila za svega 2-3°C čime je potvrđena prethodna pretpostavka za odvojeno merenje vrednosti senzora. Na većim temperaturama (45°C i 55°C) merenje je i prekinuto zbog opreznosti da kondenzacija vode u kućištu senzora ne napravi grešku i zbog već brzog dolaska do 100\% relativne vlažnosti vazduha.
 
 \vspace{10pt}
@@ -739,8 +755,9 @@ Iz testiranja je primećeno da za široku promenu merene temperature na senzoru 
 \vspace{10pt}
 
 \begin{enumerate}[label={[\arabic*]}, leftmargin=2.5cm]
-	\item Datasheet od DHT22: \label{ref:DHT22-datasheet}\\ \url{https://cdn-shop.adafruit.com/datasheets/DHT22.pdf}	
-	\item Manual za Teromometar TP300: \label{ref:TP300}\\ \url{https://dpstar.com.my/wp-content/uploads/2020/04/ecostar-TP-300-Series-Need-Probe-Digital-Thermometer\%E2\%80\%93Dpstargroup.pdf}	
+	\item Datasheet od DHT22: \label{lib:DHT22-datasheet}\\ \url{https://cdn-shop.adafruit.com/datasheets/DHT22.pdf}
+	\sloppypar
+	\item Manual za Teromometar TP300: \label{lib:TP300}\\ \url{https://dpstar.com.my/wp-content/uploads/2020/04/ecostar-TP-300-Series-Need-Probe-Digital-Thermometer\%E2\%80\%93Dpstargroup.pdf}	
 	\item Laslo Nađ, Primena senzora i aktuatora 2, FTN, Novi Sad, 2018.
 \end{enumerate}
 \renewcommand{\theenumi}{\arabic{enumi}}
