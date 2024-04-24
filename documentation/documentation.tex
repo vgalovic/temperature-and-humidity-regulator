@@ -577,6 +577,33 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
 
 \begingroup
 \justifying
+\section{Prikaz uređaja u krajnjem stadijumu izrade}
+
+\vspace{10pt}
+
+U ovom poglavlju je ns slici \ref{fig:krajnji_prikaz} prikazan krajnji stadium izrade projekta. Na slici \ref{fig:lcd_prikaz_temp_humi} je prikazan primer kako izgleda prikaz na lcd ekranu.
+
+\vspace{10pt}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/krajnji_prikaz}
+\caption{Prikaz uređaja u krajnjem stadijumu izrade}\label{fig:krajnji_prikaz}
+\end{figure}
+
+\vspace{10pt}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/lcd_prikaz_temp_humi}
+\caption{Prikaztemperatura i vlažnost vazduha na  lcd ekranu}\label{fig:lcd_prikaz_temp_humi}
+\end{figure}
+
+\endgroup
+\pagebreak
+
+\begingroup
+\justifying
 \section{Rezultati proračuna i testiranja}
 
 \vspace{10pt}
@@ -842,32 +869,4 @@ Iz testiranja je primećeno da za široku promenu merene temperature na senzoru 
 %
 %\vspace{10pt}
 %
-%\begin{lstlisting}[style=Arduino]
-%#include <SD.h>
-%
-%File logfile;
-%byte logPin = 10;
-%
-%void setup() {
-%  SD.begin(logPin);
-%
-%  ///////// Create a new file //////////
-%  char filename[] = "LOGGER00.CSV";
-%  for (int i = 0; i < 100; i++) {
-%    filename[6] = i/10 + '0';    // number the file
-%    filename[7] = i%10 + '0';    //
-%    if ( SD.exists(filename)==false ) { // only open a new file if it doesn't exist
-%      logfile = SD.open(filename, FILE_WRITE);
-%      break;  // leave the loop!
-%    }
-%  }
-%}
-%
-%void loop() {
-%  // put your main code here, to run repeatedly:
-%  logfile.println("Hello");
-%  logfile.flush();
-%  delay(1000);
-%}
-%\end{lstlisting}
-%\endgroup\grid
+%\endgroup
