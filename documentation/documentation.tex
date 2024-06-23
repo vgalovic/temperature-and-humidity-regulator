@@ -695,7 +695,7 @@ B_{uk} = B_{motora} + B_{diska} = 0.414 \times 10^{-6} \frac{Nms}{rad}
     xmin=0, xmax=0.25,
 	scaled x ticks=false,
 	xticklabel style={/pgf/number format/fixed,},
-   xtick={0, 0.05, 0.1, 0.15, 0.2, 0.25},
+    xtick={0, 0.05, 0.1, 0.15, 0.2, 0.25},
 	ymin=0, ymax=800,
     legend pos=north west,
     ymajorgrids=true,
@@ -703,8 +703,7 @@ B_{uk} = B_{motora} + B_{diska} = 0.414 \times 10^{-6} \frac{Nms}{rad}
      
 \addplot[no marks, color=blue] table[x=Time, y=Amplitude]{step_response/step_response.txt};
 
-
-\addplot[mark=*, color=red] coordinates{(0.1497, 731.2692)} node[pin=-30:{$t_{s} = 0.1497$s}]{};
+\addplot[mark=*, color=red] coordinates{(0.1497, 731.2692)} node[pin=-30:{$t_{s} 	\approx 0.15$s}]{};
 \draw [dashed,help lines, color=red] (0,731.2692) -| (0.1497,0);
 
 \end{axis}

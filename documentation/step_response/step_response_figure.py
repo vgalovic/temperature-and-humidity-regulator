@@ -54,7 +54,3 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-# Print the calculated settling time and its corresponding coordinates
-print(f"Settling time to 2% tolerance: {settling_time:.4f} seconds")
-print(f"Settling time coordinate: ({settling_time_coord:.4f}, {settling_response_coord:.4f})")
-
