@@ -4,7 +4,7 @@
 #define DHT 12
 #define DELAY_TIME 2000
 #define HUMIDITY_LIMIT 100
-#define TEMPERATURE_LIMIT 65
+#define TEMPERATURE_LIMIT 80
 #define TIME_LIMIT 40 //180
 
 uint64_t en = 0;
@@ -30,8 +30,8 @@ void getData(){
 
   time += DELAY_TIME/1000;
 
-  Serial.print(humidity); 
-  Serial.print(" "); 
+//  Serial.print(humidity); 
+//  Serial.print(" "); 
   Serial.print(temperature); 
   Serial.print(" "); 
   Serial.println(time);  
@@ -44,8 +44,8 @@ void setup() {
 
   while(!Serial);
 
-  Serial.print("Humidity");
-  Serial.print(" ");
+//  Serial.print("Humidity");
+//  Serial.print(" ");
   Serial.print("Temperature");
   Serial.print(" ");
   Serial.println("Time");
@@ -53,11 +53,11 @@ void setup() {
 
 void loop() {
   if(millis() > en){
-    if(time < TIME_LIMIT){
+//   if(time < TIME_LIMIT){
         if(temperature < TEMPERATURE_LIMIT){ //if(humidity < HUMIDITY_LIMIT){
             getData();
             en = millis() + DELAY_TIME;
         }
-     }
+//     }
   }
 }

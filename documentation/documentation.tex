@@ -10,7 +10,7 @@
 \usepackage[none]{hyphenat}
 
 \usepackage{amsfonts, amssymb, amsmath, amstext}
-\usepackage{graphicx, wrapfig, enumitem, hyperref}
+\usepackage{graphicx, wrapfig, enumitem, hyperref, gensymb}
 \usepackage{chngcntr, ragged2e, pgfplots}
 \usepackage{caption, float, lmodern, cleveref}
 
@@ -22,6 +22,13 @@
 \Crefname{grafik}{Grafik}{Grafici}
 
 \counterwithout{enumi}{section}
+
+% Define constants
+\pgfmathsetmacro{\J}{0.000000807}
+\pgfmathsetmacro{\b}{0.000000414}
+\pgfmathsetmacro{\K}{0.0059}
+\pgfmathsetmacro{\R}{1.72}
+\pgfmathsetmacro{\L}{0.000106}
 
 \title{Projekat iz primene senzora i aktulatora}
 \author{Vladimir Galović i Stefan Ostojić}
@@ -283,6 +290,7 @@ Mane ovog senzora:
 \vspace{10pt}
 
 Prednosti BLDC motora : 
+
 \begin{enumerate}
 	\item Velika brzina obrtanja 
 	\item Veliki obrtni momenat 
@@ -292,6 +300,7 @@ Prednosti BLDC motora :
 	\item Visoka pouzdanost  
 	\item Dug vek eksploatacije
 \end{enumerate}
+
 \endgroup
 \pagebreak
 Jedina mana BLDC motora je složenost elektronske komutacije. Motoru je potrebna i informacija o ugaonom položaju rotora (stalnog magneta) kako bi spoljašnje drajvesko kolo koje vrši komutaciju, donelo odluku kada treba izvršiti preusmeravanje struje kroz namotaje. Praćenje položaja rotor najčešće se vrši primenom Holovih senzora(senzora magnetnog polja).
@@ -613,13 +622,99 @@ U ovom poglavlju je na slici \ref{fig:deviceMockup} prikazan krajnji stadium izr
 
 
 	\subsection{Proračuni BLDC motora }
-	
 
 \vspace{10pt}
 
+Moment inercije:
 
+\begin{align} 
+J_{disk} = \frac{r^2 m_{diska}}{2}=4 \times 10^{-7} kgm^2 \label{eq:J_disk}
+\end{align}
+
+\begin{align*}
+& J_{motora} = 4.07 \times 10^{-7} kgm^2 \\
+& J_{uk} = J_{diska} + J_{motora} = 8.07 \times 10^{-7} kgm^2
+\end{align*}
+	
+\vspace{10pt}
+
+Koficijent viskoznog trenja:
+
+\begin{align}
+M = M_{op} + B \times \omega + \partial \frac{d \omega}{dt} \label{eq:M}
+\end{align}
+
+U ustaljenom stanju : $\partial \frac{d \omega}{dt} = 0$
+
+\begin{align*}
+M = M_{op} + B \omega
+\end{align*}
+
+U praznom hodu : $M _{op} = 0$
+
+\begin{align*}
+& M = B \omega\\
+& M= k_t I_A\\
+& k_t I_A = B \omega
+\end{align*}
+
+\begin{align*}
+& B_{motora} = 0.209 \times 10^{-6} \frac{Nms}{rad}\\
+& B_{diska} = 0.205 \times 10^{-6} \frac{Nms}{rad}
+\end{align*}
+
+\begin{align*}
+B_{uk} = B_{motora} + B_{diska} = 0.414 \times 10^{-6} \frac{Nms}{rad}
+\end{align*}
+
+\begin{align}
+& M_{EM} = M_M \label{eq:M_EM} \\
+& k_tI = B \omega_{m_\infty} \label{eq:k_tI}
+\end{align}
+
+\begin{align*}
+& k_t \frac{u-E}{R} = B \omega_{m_\infty}\\
+& k_t \frac{u}{R} - k_t \times k_v \frac{\omega_{m_\infty}}{R} =  B \omega_{m_\infty}
+\end{align*}
+
+\begin{align*}
+\omega_{m_\infty} = \frac{u}{ k_v + \frac{B \times R}{k_t} } = 747.42 \frac{rad}{s}
+\end{align*}
+
+\vspace{10pt}
+\pagebreak
+
+\begin{grafik}
+\begin{center}
+\begin{tikzpicture}
+\centering
+\begin{axis}[width=\linewidth, height=10cm,
+	xlabel={Vreme [s]},    
+    ylabel={Amplituda},
+    label style={font=\small},
+    xmin=0, xmax=0.25,
+	scaled x ticks=false,
+	xticklabel style={/pgf/number format/fixed,},
+   xtick={0, 0.05, 0.1, 0.15, 0.2, 0.25},
+	ymin=0, ymax=800,
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed]
+     
+\addplot[no marks, color=blue] table[x=Time, y=Amplitude]{step_response/step_response.txt};
+
+
+\addplot[mark=*, color=red] coordinates{(0.1497, 731.2692)} node[pin=-30:{$t_{s} = 0.1497$s}]{};
+\draw [dashed,help lines, color=red] (0,731.2692) -| (0.1497,0);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}			
+\caption{Odziv koraka}\label{grafiik:step_response}
+\end{grafik}
 
 \pagebreak
+
 
 	\subsection{Testiranja senzora DHT22}
 	
@@ -649,8 +744,6 @@ Primećeno je da su mala povećanja temperature vode imala veliki uticaj na brzi
 \vspace{10pt}
 
 
-		\subsubsection*{Testiranje merenja vlage senzora DHT22}
-
 \vspace{10pt}
 
 \begin{grafik}	
@@ -658,8 +751,8 @@ Primećeno je da su mala povećanja temperature vode imala veliki uticaj na brzi
 \begin{tikzpicture}
 \centering
 \begin{axis}[width=\linewidth, height=12cm,
-    xlabel={Time [s]},
-	ylabel={Humidity [\%]},        
+    xlabel={Vreme [s]},
+	ylabel={Vlažnost [\%]},        
     label style={font=\small},
 	xmin=2, xmax=40,    
     ymax=100,
@@ -694,19 +787,29 @@ Primećeno je da su mala povećanja temperature vode imala veliki uticaj na brzi
 
 \vspace{10pt}		
 		
-Testiranje temperature nije izvršeno u zatvorenoj sredini zbog izbora kuhinjskog rešoa za grejno telo. Pretpostavljeno je da bi veličina i jačina ovog grejnog tela prebrzo zagreja bilo koji materijal poput prethodno korišćene plastične kutije.Senzor je hvataljkom postavljen na visinu od 60mm iznad centra rešoa (Slika \ref{fig:testTemp}), a referentna temperatura samog rešoa merena je kuhinjskim termometrom TP-300 \ref{lib:TP300}.
+Testiranje temperature nije izvršeno u zatvorenoj sredini zbog izbora kuhinjskog rešoa za grejno telo. Pretpostavljeno je da bi veličina i jačina ovog grejnog tela prebrzo zagreja bilo koji materijal poput prethodno korišćene plastične kutije. Temperaturu smo merili iz dve verzije eksperimenta:
+	
+	\begin{enumerate}[label={\alph*)}]
+		\item Kada je TP-300 direktno prislonjen na grejno telo,
+		\item Kada je TP-300 na istoj visini kao i DHT22.
+	\end{enumerate}
+
+
+		\subsubsection*{a) Testiranje merenja temperature kada je TP-300 direktno prislonjen na grejno telo}
+
+Senzor je hvataljkom postavljen na visinu od 60mm iznad centra rešoa (Slika \ref{fig:testTempA}), a referentna temperatura samog rešoa merena je kuhinjskim termometrom TP-300 \ref{lib:TP300}.
 
 \vspace{10pt}
 
 \begin{figure}[H]
 \centering
-\rotatebox{90}{\includegraphics[scale=0.09]{images/testTemp}}
-\caption{Slika testiranja merenja temperature senzora DHT22} \label{fig:testTemp}
+\rotatebox{90}{\includegraphics[scale=0.09]{images/testTempA}}
+\caption{Slika testiranja merenja temperature senzora DHT22} \label{fig:testTempA}
 \end{figure}
 
 \pagebreak
 
-Iz testiranja je primećeno da za široku promenu merene temperature na senzoru potrebne su velike temperature grejnog tela (rešoa). Inegracija grejnog tela u sam projekat bi kompromitovala mnoge plastične komponente korišćene u projektu uzeći u obzir da je temperatura na kojoj se PVC plastika deformiše je 40-80°C. Krajnja vrednosti koju je senzor, koji poseduje plastično kućište, izmerio je bila 65°C dok je vrednost grejnog tela bila 184°C (Grafik \ref{grafiik:temp}). Time je potvrđena pretpostavka u Uvodu da se izbacivanjem grejnih elemenata projekat drastično pojednastavljuje. 
+Iz testiranja je primećeno da za široku promenu merene temperature na senzoru potrebne su velike temperature grejnog tela (rešoa). Inegracija grejnog tela u sam projekat bi kompromitovala mnoge plastične komponente korišćene u projektu uzeći u obzir da je temperatura na kojoj se PVC plastika deformiše je 40-80°C. Krajnja vrednosti koju je senzor, koji poseduje plastično kućište, izmerio je bila 65°C dok je vrednost grejnog tela bila 184°C (Grafik \ref{grafiik:tempB}). Time je potvrđena pretpostavka u Uvodu da se izbacivanjem grejnih elemenata projekat drastično pojednastavljuje. 
 
 \vspace{10pt}
 
@@ -715,8 +818,8 @@ Iz testiranja je primećeno da za široku promenu merene temperature na senzoru 
 \begin{tikzpicture}
 \centering
 \begin{axis}[width=\linewidth, height=8cm,
-	xlabel={Time [s]},    
-    ylabel={Temperature [°C]},
+	xlabel={Vreme [s]},    
+    ylabel={Temperatura [°C]},
     label style={font=\small},
     xmin=2, xmax=650,
 	ymax=200,
@@ -725,16 +828,65 @@ Iz testiranja je primećeno da za široku promenu merene temperature na senzoru 
     grid style=dashed]
      
 \addlegendentry{DHT22}
-\addplot[no marks, color=blue] table[x=Time, y=Temperature]{tests/temperature/test1.txt};
+\addplot[no marks, color=blue] table[x=Time, y=Temperature]{tests/temperature/testA1.txt};
 
 \addlegendentry{Kuhinjski termometar(TP300)}
-\addplot[no marks, color=red] table[x=Time, y=Temperature]{tests/temperature/test2.txt};
+\addplot[no marks, color=red] table[x=Time, y=Temperature]{tests/temperature/testA2.txt};
 
 \end{axis}
 \end{tikzpicture}
 \end{center}			
-\caption{Testiranja merenja temperature senzora DHT22}\label{grafiik:temp}
+\caption{Testiranja merenja temperature senzora DHT22}\label{grafiik:tempA}
 \end{grafik}
+
+\pagebreak
+
+	\subsubsection*{b) Testiranje merenja temperature kada je TP-300 na istoj visini kao i DHT22}
+
+\vspace{10pt}		
+		
+Senzor je ostao na istoj visini od 60mm iznad centra rešoa (Slika \ref{fig:testTempB}), a kuhinjski termometar TP-300 je postavljen na istu distancu od rešoa kao i senzor.\ref{lib:TP300}.
+
+\vspace{10pt}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.25]{images/testTempB}
+\caption{Slika testiranja merenja temperature senzora DHT22} \label{fig:testTempB}
+\end{figure}
+
+\pagebreak
+
+Iz ovog testiranja je primećeno da kuhinjski termometar, i ako izabran za referentnu tačku, primetno kasni za senzorom DHT22. Razlog za ovaku razliku možemo uzeti osnovne primene ova dva merna uređaja. DHT22 je namenjen za merenje temperature i vlažnosti vazduha, dok je kuhinjski termometar TP300 namenjen za kontaktno merenje temperature neke tečnosti ili hrane. Površina je još jedan moguću faktor koji je uticao na ovakav rezultat jer je očigledna veća površina DHT22 od TP300.
+
+\vspace{10pt}
+
+\begin{grafik}
+\begin{center}
+\begin{tikzpicture}
+\centering
+\begin{axis}[width=\linewidth, height=8cm,
+	xlabel={Vreme [s]},    
+    ylabel={Temperatura [°C]},
+    label style={font=\small},
+    xmin=2, xmax=650,
+	ymax=100,
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed]
+     
+\addlegendentry{DHT22}
+\addplot[no marks, color=blue] table[x=Time, y=Temperature]{tests/temperature/testB1.txt};
+
+\addlegendentry{Kuhinjski termometar(TP300)}
+\addplot[no marks, color=red] table[x=Time, y=Temperature]{tests/temperature/testB2.txt};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}			
+\caption{Testiranja merenja temperature senzora DHT22}\label{grafiik:tempB}
+\end{grafik}
+
 
 \pagebreak
 \endgroup
@@ -780,8 +932,10 @@ Iz testiranja je primećeno da za široku promenu merene temperature na senzoru 
 \begin{enumerate}[label={[\arabic*]}, leftmargin=2.5cm]
 	\item Datasheet od DHT22: \label{lib:DHT22-datasheet}\\ \url{https://cdn-shop.adafruit.com/datasheets/DHT22.pdf}
 	\sloppypar
-	\item Manual za Teromometar TP300: \label{lib:TP300}\\ \url{https://dpstar.com.my/wp-content/uploads/2020/04/ecostar-TP-300-Series-Need-Probe-Digital-Thermometer\%E2\%80\%93Dpstargroup.pdf}	
+	\item Datasheet za Teromometar TP300: \label{lib:TP300}\\ \url{https://dpstar.com.my/wp-content/uploads/2020/04/ecostar-TP-300-Series-Need-Probe-Digital-Thermometer\%E2\%80\%93Dpstargroup.pdf}
+	\item Datasheet za A-max 22, 4.5V: \label{lib:A-max-22}\\ \url{https://www.maxongroup.com/medias/sys_master/root/8881643913246/EN-21-168.pdf}	
 	\item Laslo Nađ, Primena senzora i aktuatora 2, FTN, Novi Sad, 2018.
+	\item Damir Krlješ, Zbirka rešenih zadataka iz aktuatora
 \end{enumerate}
 \renewcommand{\theenumi}{\arabic{enumi}}
 
