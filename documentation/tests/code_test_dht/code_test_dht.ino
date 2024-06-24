@@ -4,7 +4,7 @@
 #define DHT 12
 #define DELAY_TIME 2000
 #define HUMIDITY_LIMIT 100
-#define TEMPERATURE_LIMIT 80
+#define TEMPERATURE_LIMIT 65
 #define TIME_LIMIT 40 //180
 
 uint64_t en = 0;
