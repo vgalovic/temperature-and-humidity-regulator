@@ -23,12 +23,6 @@
 
 \counterwithout{enumi}{section}
 
-% Define constants
-\pgfmathsetmacro{\J}{0.000000807}
-\pgfmathsetmacro{\b}{0.000000414}
-\pgfmathsetmacro{\K}{0.0059}
-\pgfmathsetmacro{\R}{1.72}
-\pgfmathsetmacro{\L}{0.000106}
 
 \title{Projekat iz primene senzora i aktulatora}
 \author{Vladimir Galović i Stefan Ostojić}
@@ -628,13 +622,11 @@ U ovom poglavlju je na slici \ref{fig:deviceMockup} prikazan krajnji stadium izr
 Moment inercije:
 
 \begin{align} 
-J_{disk} = \frac{r^2 m_{diska}}{2}=4 \times 10^{-7} kgm^2 \label{eq:J_disk}
+& J_{disk} = \frac{r^2 m_{diska}}{2}=4 \times 10^{-7} kgm^2 \label{eq:J_disk} \\
+& J_{motora} = 4.07 \times 10^{-7} kgm^2 \nonumber \\
+& J_{uk} = J_{diska} + J_{motora} = 8.07 \times 10^{-7} kgm^2  \nonumber
 \end{align}
 
-\begin{align*}
-& J_{motora} = 4.07 \times 10^{-7} kgm^2 \\
-& J_{uk} = J_{diska} + J_{motora} = 8.07 \times 10^{-7} kgm^2
-\end{align*}
 	
 \vspace{10pt}
 
