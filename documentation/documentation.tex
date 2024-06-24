@@ -23,13 +23,6 @@
 
 \counterwithout{enumi}{section}
 
-% Define constants
-\pgfmathsetmacro{\J}{0.000000807}
-\pgfmathsetmacro{\b}{0.000000414}
-\pgfmathsetmacro{\K}{0.0059}
-\pgfmathsetmacro{\R}{1.72}
-\pgfmathsetmacro{\L}{0.000106}
-
 \title{Projekat iz primene senzora i aktulatora}
 \author{Vladimir Galović i Stefan Ostojić}
 \date{\today}
@@ -190,7 +183,7 @@ Spajanjem senzora DHT22 i BLDC ventilatora se ostvaruje regulacija temperature i
 
 \vspace{10pt}
 
-U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom projektu. O njihovim osnovnim karakteristika, prednostima i problemima. Mnoge komponente su izabrane zbog lake dostupnosti, da bi se u slučaju ponovne realzacije ili kavara lako pronašla zamena. Većina komponenti je povezana sa Arduino platformom koja je idealna za realizaciju ovakvih projekata. Glavne prednosti Arduino pltforme :
+U ovom poglavlju se govori o pojedinačnim komponentama korišćenim u ovom projektu. O njihovim osnovnim karakteristika, prednostima i problemima. Mnoge komponente su izabrane zbog lake dostupnosti, da bi se u slučaju ponovne realzacije ili kavara lako pronašla zamena. Većina komponenti je povezana sa Arduino platformom koja je idealna za realizaciju ovakvih projekata. Glavne prednosti Arduino platforme :
 
 	\begin{itemize}
 	
@@ -272,7 +265,7 @@ Mane ovog senzora:
 	
 \begingroup
 	
-	Glavni aktuator ovog projekta je BLDC ventilator od 5V (Slika \ref{fig:DC40mm5V}). Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u billo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
+	Glavni aktuator ovog projekta je BLDC ventilator od 5V (Slika \ref{fig:DC40mm5V}). Motor jednosmerne struje bez četkica (BrushLess DC) je izabran zbog njegovih mnogih prednosti u odnosu na klasičan motor jednosmerne struje sa četkicama. Osnovna namena BLDC ventilatora koji je izabran za ovaj projekat je kao hladnjak za Raspberry Pi platformu. Zbog takve namene idealn je izbor za ovaj projekt. Povezanost sa popularnom i standardizovanom Raspberry Pi pltformom olakšava zamenu ovog ventilatora u slučaju njegovog kvara.  Malih je dimenzija zbog čeka se može lako uklopiti u bilo kakav prostor sa lakoćom. Osnovne karakteristike ovog modela su: 
 
 \begin{itemize}
 	\item Radni napon: 5V
@@ -307,7 +300,7 @@ Jedina mana BLDC motora je složenost elektronske komutacije. Motoru je potrebna
 
 \vspace{10pt}
 
-Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan korišćenjem  PWM (Pulse Width Modulation) signala (Slika \ref{fig:pwm}) i sa jednim 2N2222A NPN tranzistorom. VCC motora je spojen na 5V a GND motora na kolektor tranzistora. Emiter tranzistora se spaja na GND, a baza na D10 pin Arduina sa kojeg se šalje kontrolni signal. Brzina motora je direktna posledica vrednosti fatkora ispune (odnosom trajanja visokog i niskog naponskog nivoa u toku jedne periode) koji se šalje iz Arduina. Za svaki 1°C povećanja merene vrednosi vrednost faktora ispune se povećava za 20\% sve dok ne dođe do 100\% kada ventilator na maxsimalnoj svojoj brzini. 
+Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan korišćenjem  PWM (Pulse Width Modulation) signala (Slika \ref{fig:pwm}) i sa jednim 2N2222A NPN tranzistorom. VCC motora je spojen na 5V a GND motora na kolektor tranzistora. Emiter tranzistora se spaja na GND, a baza na D10 pin Arduina sa kojeg se šalje kontrolni signal. Brzina motora je direktna posledica vrednosti fatkora ispune (odnosom trajanja visokog i niskog naponskog nivoa u toku jedne periode) koji se šalje iz Arduina. Za svaki 1°C povećanja merene vrednosi vrednost faktora ispune se povećava za 20\% sve dok ne dođe do 100\% kada ventilator na maksimalnoj svojoj brzini. 
 
 \vspace{10pt}
 
@@ -358,7 +351,7 @@ Glavni način kontrolisanja BLDC ventilatora u ovom projektu je realizovan kori�
 
 	\subsection{4x4 tastatura}
 	
-	Poslednji elemenat koji će poboljšati korisničko iskustvo je senzor dodira tj. 4x4 tastatura. Tastatura se sa stoji između dva sloja. Jeden je spoj svih redova, a drugi svih kolini. Pritiskom se pravi kontakt između ova dva sloja čime se i determiniše koji je taster pritisnut. Za sve izabrane funkcionalnosti iskorišćeno je smo prve dve redove i 4 kolone. Tako da od ukupnog broja pinova kojih je 8 ovde se koriste samo 6 (2 za redove i 4 za kolone). Pinovi su spojeni na sledeće portove Arduina C1->D5, C2->D4, C3->D3, C4->D2, R1->D9 i R2->D8. Funkcionalnosti tastera biće objašnjne u sledećem poglavlju.
+	Poslednji elemenat koji će poboljšati korisničko iskustvo je senzor dodira tj. 4x4 tastatura. Tastatura se sa stoji između dva sloja. Jeden je spoj svih redova, a drugi svih kolini. Pritiskom se pravi kontakt između ova dva sloja čime se i determiniše koji je taster pritisnut. Za sve izabrane funkcionalnosti iskorišćeno je smo prva dva reda i 4 kolone. Tako da od ukupnog broja pinova kojih je 8 ovde se koriste samo 6 (2 za redove i 4 za kolone). Pinovi su spojeni na sledeće portove Arduina C1->D5, C2->D4, C3->D3, C4->D2, R1->D9 i R2->D8. Funkcionalnosti tastera biće objašnjne u sledećem poglavlju.
 	
 \pagebreak
 
@@ -405,13 +398,13 @@ U ovom poglavlju se govori u kratkim crtama o kodu koji pokreće hardver projekt
   	\item \texttt{ Serijal port}: Dijagnostički podaci u debug modu: Kada je debug mod aktiviran, prikazuju se dijagnostičke informacije preko serijskog porta, dok na LCD ekranu je ispisana brzina prenosa bita po sekundi.
 \end{enumerate}
 
-U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljive i funkcije kao i objšnjenje šta oni rade unutar koda.
+U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljive i funkcije kao i objašnjenje šta oni rade unutar koda.
     
 \vspace{10pt}
 
 	\subsection{Biblioteke}
 	\begin{itemize}
-    		\item \textbf{Keypad}: Koristi se za interakciu sa tastaturom. Github stranica do ove biblioteke je na sledećem \textbf{\texttt{\href{https://github.com/Chris--A/Keypad.git}{linku}}}.
+    		\item \textbf{Keypad}: Koristi se za interakciju sa tastaturom. Github stranica do ove biblioteke je na sledećem \textbf{\texttt{\href{https://github.com/Chris--A/Keypad.git}{linku}}}.
     		
     		\item \textbf{LiquidCrystal\_I2C}: Pomoću nje se kontroliše LCD putem I2C komunikacije. Stranica sajta arduina za preuzimanje biblioteke nalazi se na sledećem \textbf{\texttt{\href{https://downloads.arduino.cc/libraries/github.com/marcoschwartz/LiquidCrystal_I2C-1.1.2.zip}{linku}}}. 
     		
@@ -549,7 +542,7 @@ U daljem nastavku poglavalja, biće nabrojane sve biblioteke, makroi, promenljiv
         
     \item \textbf{display()}:
         \begin{enumerate}[label={},leftmargin=*]
-            \item Dobavlja očitavanja temperature i vlažnosti vazduha sa DHT22 senzora, kontroliše brzinu ventilatora i stanje zvučnika, i prikazuje relevantne informacije na LCD ekranu.
+            \item Dobavlja očitavanja temperature i vlažnosti vazduha sa DHT22 senzora, kontroliše brzinu ventilatora i stanje zujalice, i prikazuje relevantne informacije na LCD ekranu.
         \end{enumerate}
         
     \item \textbf{debugMode()}:
@@ -622,20 +615,29 @@ U ovom poglavlju je na slici \ref{fig:deviceMockup} prikazan krajnji stadium izr
 
 
 	\subsection{Proračuni BLDC motora }
+	
+\vspace{10pt}
+	
+Iako se u projektu koristi BLDC motor, zbog jednostavnijeg proračuna izabran je BDC koji je najbliži po svojim karakteristikama. Motor koji je za to izabran je Maxon A-max 22 od 4.5 V \ref{lib:A-max-22}. Cilj proračuna je računanje odziva brzine vratila motora uz dodatno opterećenje koju stvara propeler ventilatora koji će biti aproksimiran kao disk poluprečnika 20mm i debljine 10mm. Za masu tog diska uzeta je vrednost 2 grama. Primer zadatka koji je najblži narednom proračunu se može pronaći u Zbirci rešenih zadataka iz aktuatora, Damir Krlješ, Zadatak 5 \ref{lib:workbook}.
 
 \vspace{10pt}
 
-Moment inercije:
+Pre određivanja odziva brzine vratila motora moramo izračunati veličine koje nemamo. Prva ta veličina je moment inercije diska (propelera) (\ref{eq:J_disk})
+
+\vspace{10pt}
+
+Ukupan moment inercije:
 
 \begin{align} 
-J_{disk} = \frac{r^2 m_{diska}}{2}=4 \times 10^{-7} kgm^2 \label{eq:J_disk}
+& J_{disk} = \frac{r^2 m_{diska}}{2}=4 \times 10^{-7} kgm^2 \label{eq:J_disk} \\
+& J_{motora} = 4.07 \times 10^{-7} kgm^2 \nonumber \\
+& J_{uk} = J_{diska} + J_{motora} = 8.07 \times 10^{-7} kgm^2 \nonumber
 \end{align}
-
-\begin{align*}
-& J_{motora} = 4.07 \times 10^{-7} kgm^2 \\
-& J_{uk} = J_{diska} + J_{motora} = 8.07 \times 10^{-7} kgm^2
-\end{align*}
 	
+\vspace{10pt}
+
+Sledeća veličina je koeficijent viskoznog trenja koji koji slično inerciji postoji i u motoru i u disku. Takođe pretpostavićemo da naše napajanje nema strujni limit. Koristićemo jednačinu iz mehaničkog modela DC motora koja predstavlja zavisnost brzine vratila i momenta koja deluju na vratilo motora (\ref{eq:M}).
+
 \vspace{10pt}
 
 Koficijent viskoznog trenja:
@@ -655,34 +657,30 @@ U praznom hodu : $M _{op} = 0$
 \begin{align*}
 & M = B \omega\\
 & M= k_t I_A\\
-& k_t I_A = B \omega
-\end{align*}
-
-\begin{align*}
+& k_t I_A = B_{motora} \omega \\
+& B_{motora} = \frac{k_t I_A}{\omega} \\ 
 & B_{motora} = 0.209 \times 10^{-6} \frac{Nms}{rad}\\
-& B_{diska} = 0.205 \times 10^{-6} \frac{Nms}{rad}
+& B_{diska} = 0.205 \times 10^{-6} \frac{Nms}{rad} \\
+& B_{uk} = B_{motora} + B_{diska} = 0.414 \times 10^{-6} \frac{Nms}{rad}
 \end{align*}
 
-\begin{align*}
-B_{uk} = B_{motora} + B_{diska} = 0.414 \times 10^{-6} \frac{Nms}{rad}
-\end{align*}
+Krajnja ugaona brzina zavisi od opterećenja i dobija se izjednačavanjem svih momenata koji deluju na vratilo motora kada se on obrće konstantnom brzinom (ubrzanje je nula) (\ref{eq:M_EM}).
 
 \begin{align}
 & M_{EM} = M_M \label{eq:M_EM} \\
-& k_tI = B \omega_{m_\infty} \label{eq:k_tI}
+& k_tI = B_{uk} \omega_{m_\infty} \nonumber \\
+& k_t \frac{U-E}{R} = B_{uk} \omega_{m_\infty} \nonumber \\
+& k_t \frac{U}{R} - k_t \times k_v \frac{\omega_{m_\infty}}{R} =  B_{uk} \omega_{m_\infty} \nonumber \\
+& \omega_{m_\infty} = \frac{U}{ k_v + \frac{B_{uk} \times R}{k_t} } = 747.42 \frac{rad}{s} \nonumber
 \end{align}
 
-\begin{align*}
-& k_t \frac{u-E}{R} = B \omega_{m_\infty}\\
-& k_t \frac{u}{R} - k_t \times k_v \frac{\omega_{m_\infty}}{R} =  B \omega_{m_\infty}
-\end{align*}
-
-\begin{align*}
-\omega_{m_\infty} = \frac{u}{ k_v + \frac{B \times R}{k_t} } = 747.42 \frac{rad}{s}
-\end{align*}
 
 \vspace{10pt}
-\pagebreak
+
+
+Za proveru određene brzine obrtanja motora izabrana je simulaciju u Simuliku koja pored odziva prikazuje trenutak kada motor izlazi iz strujnog limita ($T_{s\_limit} \approx 0.15$s). Možemo videti da je krajnja brzina motora na grafiku približna prethodo izračunatoj brzini (Grafik \ref{grafiik:step_response}).
+
+\vspace{10pt}
 
 \begin{grafik}
 \begin{center}
@@ -703,7 +701,7 @@ B_{uk} = B_{motora} + B_{diska} = 0.414 \times 10^{-6} \frac{Nms}{rad}
      
 \addplot[no marks, color=blue] table[x=Time, y=Amplitude]{step_response/step_response.txt};
 
-\addplot[mark=*, color=red] coordinates{(0.1497, 731.2692)} node[pin=-30:{$t_{s} 	\approx 0.15$s}]{};
+\addplot[mark=*, color=red] coordinates{(0.1497, 731.2692)} node[pin=-30:{$T_{s\_limit}	\approx 0.15$s}]{};
 \draw [dashed,help lines, color=red] (0,731.2692) -| (0.1497,0);
 
 \end{axis}
@@ -725,7 +723,7 @@ Za testiranje senzora su izabrane metode koje bi bile lake za ponovnu reprodukci
 
 \vspace{10pt}	
 		
-Testiranje vlage zatvorene stredine je sprovedeno lepljenjem DHT22 za unutrašnju stranu poklopca plastične kutije. Na dno plastične kutije zapremine 1650ml je sipano 250ml vode na različitim temperaturama. Počevši od sobne temperature od 25°C pa sve do 55°C. Poklopcem sa senzorom zatvaramo kutiju i merimo vrednosti relativne vlažnosti vazduha (Slika \ref{fig:testHumi}).
+Testiranje vlage zatvorene sredine je sprovedeno lepljenjem DHT22 za unutrašnju stranu poklopca plastične kutije. Na dno plastične kutije zapremine 1650ml je sipano 250ml vode na različitim temperaturama. Počevši od sobne temperature od 25°C pa sve do 55°C. Poklopcem sa senzorom zatvaramo kutiju i merimo vrednosti relativne vlažnosti vazduha (Slika \ref{fig:testHumi}).
 
 \vspace{10pt}
 
@@ -786,7 +784,7 @@ Primećeno je da su mala povećanja temperature vode imala veliki uticaj na brzi
 
 \vspace{10pt}		
 		
-Testiranje temperature nije izvršeno u zatvorenoj sredini zbog izbora kuhinjskog rešoa za grejno telo. Pretpostavljeno je da bi veličina i jačina ovog grejnog tela prebrzo zagreja bilo koji materijal poput prethodno korišćene plastične kutije. Temperaturu smo merili iz dve verzije eksperimenta:
+Testiranje temperature nije izvršeno u zatvorenoj sredini zbog izbora kuhinjskog rešoa za grejno telo. Pretpostavljeno je da bi veličina i jačina ovog grejnog tela prebrzo zagreja bilo koji materijal poput prethodno korišćene plastične kutije. Temperaturu smo merili u dve verzije eksperimenta:
 	
 	\begin{enumerate}[label={\alph*)}]
 		\item Kada je TP-300 direktno prislonjen na grejno telo,
@@ -891,33 +889,26 @@ Iz ovog testiranja je primećeno da kuhinjski termometar, i ako izabran za refer
 \endgroup
 
 \begingroup
-\justifying
+\sloppy
+%\justifying
 \section{Zaključak}
 
 \vspace{10pt}
 
-%Ovaj odeljak je obavezan. Naslov takođe mora ostati nepromenjen. Možemo ga podeliti na dva dela:
-%
-%\begin{itemize}
-%	\item Zaključak o uspešnosti i meri završenosti projekta,
-%	\item Rezime projekta.
-%\end{itemize}
-%
-%\vspace{10pt}
-%
-%Veoma je važno na samom početku ovog dela jasno reći da li je urađeno sve ono što je bilo definisano projektnim zadatkom. Ako ima odstupanja od toga, onda kratko objasniti koja su to odstupanja i zašto su nastala. Ako su nastala odstupanja od definisanog projekta, napisati u kom mestu u radu mogu da se nađu detaljnije informacije o tome.
-%
-%\vspace{10pt}
-%
-%Rezime je mesto gde se pravi osvrt na ono što je urađeno u projektu, ili naučnom radu. Dužina rezimea može da bude od dva do tri pasusa. Prvi pasus je obavezan i predstavlja pregled onoga što je urađeno. U njemu se u kratkim crtama nabroji ono što je opisano u tekstu koji predhodi zaključku. Npr. može se sa po jednom rečenicom ponoviti suština ili rezulat svakog odeljka koji je napisan pre zaključka. Ovaj pasus je obavezan.
-%
-%\vspace{10pt}
-%
-%Drugi pasus može ukratko da ponovi ono što je nesumnjivi zaključak celog rada i koji treba da bude posebno istaknut kao vredan rezultat. Ovaj pasus nije obavezan.
-%
-%\vspace{10pt}
-%
-%Treći pasus je obavezan i predstavlja mesto gde mogu ukratko da se navedu ideje koje su se javile tokom izrade projekta ili pisanja rada i predstavljaju dalje moguće pravce razvoja konkretnog uređaja ili nove oblasti koje autor rada namerava u bliskoj budućnosti da istraži.
+Osnovni zadatak ovog projekta je regulisanje temperature i vlažnosti vazduha u nekoj zatvorenoj sredini poput humidora. Odstupanja su nastala kako bi olakšala određene elemente projekta. Jedno odstupanje je nastalo pri aproksimaciji BLDC motora kao BDC motora kako bi se proračun pojednostavio i izbegla elektronska komutacija BLDC motora. Drugo od thih odstupanja se odnosilo na testiranje merenja temperature senzora DHT22 jer se merenje nije vršilo u zatvorenoj sredini kako ne bi došlo do oštećenja senzora ili nezgode zbog visoke temperature.
+
+\vspace{10pt}
+
+Komponenta koja je osnova ovog projekta je senzor temperature i vlažnosti vazduha DHT22. Oko njega je ostatak projetka smišljen i realizovan. Za uređaj koji bi koristio merene vrednosti ovog senzora je izabran primer humidora. To je proširilo raspon ovog projekta ne samo na rad sa senzorom već sistem merenja i regulisanja ovih vrednosti. Izbor ostalih komponenti nastaje kao zadovoljavanja svih funkcionalnosti ovog proširenog sistema. Arduino platforma kao kontrolna jedinica, BLDC motor kao aktuator i osnovi elemenat regulacije, zujalica kao vid zvučnog upozorenja i LCD i 4x4 tastatura za komunikaciju sa korisnikom. Kroz softversku realizaciju je izvršena implementacija svih potrebnih funkcionalnosti poput biranja različitih režima rada i njihovog prikazivanja. Proračuni za aktuator su pored dosta aproksimiranja rezultirali u manje više očekivane vrednosti. Za testiranje senzora su izabrani eksperimenti koji bi najviše odgovarali merenim vrednostima.
+
+\vspace{10pt}
+
+Merenje i regulacija temperature i vlažnosti vazduha neke zatvorene sredine je jedan veoma komplikovan sistem koji zahteva dobru povezanost svih hardverskih i softverskih elemenata.
+
+\vspace{10pt}
+
+Za potencijalno proširenje ovog projekta mogu se dodati dodatni elementi poput grejača koji bi proces regulacije temperature, koji se ovde vrši samo kroz ventilator, proširili. Isto tako bi se mogao dodati i neki izvor dodatne vlažnosti koja bi bila kontrolisana pomoću pumpe. Tada bi se u svim procesima testiranja mogla implementirati zatvorena sredina bez ograničenja, čime bi regulator temperature i vlažnosti vazduha bio potpun. 
+
 \pagebreak
 \endgroup
 
@@ -933,8 +924,7 @@ Iz ovog testiranja je primećeno da kuhinjski termometar, i ako izabran za refer
 	\sloppypar
 	\item Datasheet za Teromometar TP300: \label{lib:TP300}\\ \url{https://dpstar.com.my/wp-content/uploads/2020/04/ecostar-TP-300-Series-Need-Probe-Digital-Thermometer\%E2\%80\%93Dpstargroup.pdf}
 	\item Datasheet za A-max 22, 4.5V: \label{lib:A-max-22}\\ \url{https://www.maxongroup.com/medias/sys_master/root/8881643913246/EN-21-168.pdf}	
-	\item Laslo Nađ, Primena senzora i aktuatora 2, FTN, Novi Sad, 2018.
-	\item Damir Krlješ, Zbirka rešenih zadataka iz aktuatora
+	\item Damir Krlješ, Zbirka rešenih zadataka iz aktuatora \label{lib:workbook}
 \end{enumerate}
 \renewcommand{\theenumi}{\arabic{enumi}}
 
