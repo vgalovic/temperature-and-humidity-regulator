@@ -72,7 +72,7 @@ This project implements a temperature regulator system using an Arduino microcon
 ## Dependencies
 
 - **Keypad**: Used for interfacing with the keypad (https://github.com/Chris--A/Keypad.git).
-- **LiquidCrystal_I2C**: Controls the LCD via I2C communication (https://downloads.arduino.cc/libraries/github.com/marcoschwartz/LiquidCrystal_I2C-1.1.2.zip).
+- **LiquidCrystal_I2C**: Controls the LCD via I2C communication (https://github.com/johnrickman/LiquidCrystal_I2C).
 - **DHT22**: Enables reading data from the DHT22 sensor (https://github.com/dvarrel/DHT22.git).
 
 ---
