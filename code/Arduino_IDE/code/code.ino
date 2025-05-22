@@ -100,10 +100,10 @@ void loop();
 
 /**
  * @brief Controls the buzzer based on humidity
- * 
+ *
  * This function checks the humidity level and activates the buzzer if the humidity
  * falls below the minimum threshold or exceeds the maximum threshold.
- * 
+ *
  * @param humidity Current humidity value
  * @return True if the buzzer is activated, false otherwise
  */
@@ -119,10 +119,10 @@ bool buzzControl(uint8_t humidity) {
 
 /**
  * @brief Controls the speed of the DC fan based on temperature
- * 
+ *
  * This function adjusts the fan speed based on the current temperature. It calculates
  * the fan speed percentage and adjusts the PWM signal accordingly.
- * 
+ *
  * @param temperature Current temperature value
  * @return The fan speed percentage
  */
@@ -144,7 +144,7 @@ uint8_t dcFanControl(uint8_t temperature) {
  */
 void display() {
  uint64_t rawdata = dht.getRawData();
-  
+
   if(dht.getLastError() != 0){
     analogWrite(PWM, 0);
     digitalWrite(BUZZ, HIGH);
@@ -166,21 +166,21 @@ void display() {
   bool buzz = buzzControl((uint8_t)humidity);
   uint8_t fanSpeed = dcFanControl((uint8_t)temperature);
 
-  lcd.clear(); 
+  lcd.clear();
 
   lcd.setCursor(0, 0);
   if(display_state){
     lcd.print("Temp: "); lcd.print(temperature); lcd.print(" "); lcd.print((char)223); lcd.print("C");
-    
+
     lcd.setCursor(0, 1);
     lcd.print("Humi: "); lcd.print(humidity); lcd.print(" %");
   }
   else{
     lcd.print("Fan speed: "); lcd.print(fanSpeed); lcd.print(" %");
-    
+
     lcd.setCursor(0, 1);
     lcd.print("Buzz: "); lcd.print(buzz ? "On" : "Off");
-  } 
+  }
 }
 
 /**
@@ -188,10 +188,10 @@ void display() {
  */
 void debugMode() {
   lcd.clear();
-  
+
   lcd.setCursor(0, 0);
   lcd.print("DHT22 Debug mode");
-  
+
   lcd.setCursor(0, 1); 
   lcd.print("Serial: "); lcd.print(DEBUG_SERIAL_BAUDRATE); lcd.print(" b/s");
 
@@ -214,15 +214,15 @@ void action() {
       action_state = NORMAL_DISPLAY;
       action();
       break;
-    
+
     default:
       lcd.clear();
       lcd.setCursor(0, 0);
-      lcd.print("Testiranje");
-      
+      lcd.print("Testing:");
+
       lcd.setCursor(0, 1);
-      lcd.print(action_state == FAN_TEST ? "dc ventilatora" : "Zujalice");
-      
+      lcd.print(action_state == FAN_TEST ? "DC fan" : "Buzzer");
+
       digitalWrite(BUZZ, action_state == BUZZER_TEST ? LOW : HIGH);
       analogWrite(PWM, action_state == FAN_TEST ? 255 : 0);
       break;
@@ -231,10 +231,10 @@ void action() {
 
 /**
  * @brief Handles keypad events
- * 
+ *
  * This function is called whenever a keypad key is pressed. It determines the action
  * to be taken based on the pressed key.
- * 
+ *
  * @param key The pressed key
  */
 void keypadEvent(char key) {
@@ -265,26 +265,26 @@ void setParameters() {
 
     if (keypad.getState() == PRESSED) {
       lcd.clear();
-      
+
       lcd.setCursor(2, 0);
       lcd.print(humidity_min);
-      
+
       lcd.setCursor(7, 0);
       lcd.print(humidity_max);
-      
+
       lcd.setCursor(12, 0);
       lcd.print(temperature_min);
-      
+
       switch (key_parameters) {
         case '1': humidity_min = (humidity_min < HUMIDITY_MIN_UPPER_LIMIT) ? humidity_min + HUMIDITY_STEP : humidity_min; break;
         case '5': humidity_min = (humidity_min > HUMIDITY_MIN_LOWER_LIMIT) ? humidity_min - HUMIDITY_STEP : humidity_min; break;
-        
+
         case '2': humidity_max = (humidity_max< HUMIDITY_MAX_UPPER_LIMIT) ? humidity_max + HUMIDITY_STEP : humidity_max; break;
         case '6': humidity_max = (humidity_max> HUMIDITY_MAX_LOWER_LIMIT) ? humidity_max - HUMIDITY_STEP : humidity_max; break;
 
         case '3': temperature_min = (temperature_min < TEMPERATURE_MIN_UPPER_LIMIT) ? temperature_min + TEMPERATURE_STEP : temperature_min; break;
         case '7': temperature_min = (temperature_min > TEMPERATURE_MIN_LOWER_LIMIT) ? temperature_min - TEMPERATURE_STEP : temperature_min; break;
-        
+
         case '4': humidity_min = DEFAULT_HUMIDITY_MIN; humidity_max= DEFAULT_HUMIDITY_MAX; temperature_min = DEFAULT_TEMPERATURE_MIN; break;
         case '8': return;
       }
@@ -302,17 +302,17 @@ void setup() {
   lcd.backlight();
 
   lcd.setCursor(0, 0);
-  lcd.print("Regulator");
+  lcd.print("Temp & Hum");
 
   lcd.setCursor(0, 1);
-  lcd.print("temperature");
+  lcd.print("Regulator");
 
   pinMode(BUZZ, OUTPUT);
   pinMode(PWM, OUTPUT);
   pinMode(DHT, INPUT);
 
   analogWrite(PWM, 255);
-  
+
   delay(BUZZER_DELAY); 
   digitalWrite(BUZZ, HIGH);
   delay(BUZZER_DELAY);
@@ -328,10 +328,10 @@ void setup() {
 void loop() {
   if(millis() > en_mill){
     action();
-    
+
     en_mill = millis() + DHT_UPDATE_INTERVAL;
   }
-  
+
   if(char key = keypad.getKey()) {
     if (key == NO_KEY) { /*Handle no key press*/ }
     else { keypadEvent(key); }
