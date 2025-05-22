@@ -123,7 +123,6 @@ This project uses **CMake** to generate build files for AVR microcontrollers.
 
 - [CMake](https://cmake.org/download/)
 - AVR GCC toolchain (`avr-gcc`, `avr-objcopy`, `avrdude`, etc.)
-- AVR programmer (e.g., USBasp, AVRISP mkII)
 
 ### Build steps
 
