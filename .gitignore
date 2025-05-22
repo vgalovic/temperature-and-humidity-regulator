@@ -1,0 +1,4 @@
+code/AVR_Baremetal/build
+code/AVR_Baremetal/compile_commands.json
+Session.vim
+code/AVR_Baremetal/.cache/clangd/index
