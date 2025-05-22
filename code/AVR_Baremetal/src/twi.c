@@ -10,7 +10,7 @@
  * Holds the status code from TWI status register when an unexpected
  * status is detected.
  */
-static char _twi_error_stat = TWI_ERROR_NONE;
+static uint8_t _twi_error_stat = TWI_ERROR_NONE;
 
 /**
  * @brief Initialize TWI (I2C) interface.
